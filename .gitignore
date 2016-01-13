@@ -67,3 +67,9 @@ ehthumbs.db
 
 # vim
 *.swp
+
+# config files since they change so much, except for an example
+src/*.json
+src/*.txt
+!src/tega_teleop_config.example.json
+!src/script_example.txt

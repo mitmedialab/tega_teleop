@@ -21,7 +21,7 @@ class tega_teleop(QtGui.QMainWindow):
         """ Initialize teleop interface """
         # setup GUI teleop interface
         super(tega_teleop, self).__init__()
-        self.setGeometry(100,100,600,600)
+        self.setGeometry(200,100,800,600)
         self.setWindowTitle("Tega Teleop")
 
         # create layout 
@@ -48,24 +48,20 @@ class tega_teleop(QtGui.QMainWindow):
         speech_ui = tega_speech_ui(self.ros_teleop)
         self.central_layout.addWidget(speech_ui, 2, 0, 1, 2)
         
-        #label = QtGui.QLabel(self.central_widget)
-        #label.setFrameStyle(QtGui.QFrame.Panel)
-        #label.setText("Animations")
-        #anim_layout.addWidget(label, 0, 0, 1, 4)
-
 
 if __name__ == '__main__':
     # initialize top-level GUI manager
     app = QtGui.QApplication(sys.argv)
 
     # start teleop interface
-    #try:
-    teleop_window = tega_teleop()
-    teleop_window.show()
+    try:
+        teleop_window = tega_teleop()
+        teleop_window.show()
 
-    #except rospy.ROSInterruptException: 
-        #print ('ROSnode shutdown')
-        #pass
+    # if roscore isn't running or shuts down unexpectedly
+    except rospy.ROSInterruptException: 
+        print ('ROS node shutdown')
+        pass
 
     # enter main loop, then exit
     sys.exit(app.exec_())

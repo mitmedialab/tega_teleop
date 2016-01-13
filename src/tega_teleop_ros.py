@@ -43,10 +43,10 @@ class tega_teleop_ros():
 
     def send_speech_message(self, speech):
         """ Publish TegaAction playback audio message """
-        print ('sending speech message')
+        print ('\nsending speech message')
         msg = TegaAction()
         msg.do_sound_playback = True
         msg.wav_filename = speech
-        self.tega_pub.pubish(msg)
+        self.tega_pub.publish(msg)
         rospy.loginfo(msg)
 

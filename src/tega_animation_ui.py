@@ -56,6 +56,6 @@ class tega_animation_ui(QtGui.QWidget):
             button.clicked.connect(partial(self.ros_node.send_motion_message, anim))
             anim_layout.addWidget(button, row, col)
             col += 1
-            if(col >= 4): # four animation buttons per row
+            if(col >= 6): # four animation buttons per row
                 col = 0
                 row += 1
