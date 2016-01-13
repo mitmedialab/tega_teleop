@@ -1,5 +1,7 @@
 from PySide import QtGui # basic GUI stuff
 from r1d1_msgs.msg import TegaAction # ROS msgs
+from tega_teleop_ros import tega_teleop_ros
+from functools import partial
 
 class tega_animation_ui(QtGui.QWidget):
 
@@ -35,31 +37,25 @@ class tega_animation_ui(QtGui.QWidget):
             TegaAction.MOTION_SWIPE_STAGERIGHT
             ]
 
-
-    def __init__(self):
-        super(tega_animation_ui, self).__init__()
-        
+    def __init__(self, ros_node):
         """ Make a button for each animation """
+        super(tega_animation_ui, self).__init__()
+        # get reference to ros node so we can do callbacks to publish messages
+        self.ros_node = ros_node
+        
         # put buttons in a box
         anim_box = QtGui.QGroupBox(self)
-        #central_layout.addWidget(anim_box)
         anim_layout = QtGui.QGridLayout(anim_box)
         anim_box.setTitle("Animations")
-        #label = QtGui.QLabel(self.central_widget)
-        #label.setFrameStyle(QtGui.QFrame.Panel)
-        #label.setText("Animations")
-        #anim_layout.addWidget(label, 0, 0, 1, 4)
 
         # create animation buttons and add to layout
         col = 0
         row = 1
         for anim in self.animations:
-            self.button = QtGui.QPushButton(anim.lower().replace("\"", ""), 
-                    anim_box)
-            self.button.clicked.connect(lambda: self.send_motion_message(anim))
-            anim_layout.addWidget(self.button, row, col)
+            button = QtGui.QPushButton(anim.lower().replace("\"", ""), anim_box)
+            button.clicked.connect(partial(self.ros_node.send_motion_message, anim))
+            anim_layout.addWidget(button, row, col)
             col += 1
             if(col >= 4): # four animation buttons per row
                 col = 0
                 row += 1
-
