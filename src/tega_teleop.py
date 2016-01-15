@@ -21,7 +21,7 @@ class tega_teleop(QtGui.QMainWindow):
         """ Initialize teleop interface """
         # setup GUI teleop interface
         super(tega_teleop, self).__init__()
-        self.setGeometry(200,100,800,600)
+        self.setGeometry(200,100,800,700)
         self.setWindowTitle("Tega Teleop")
 
         # create layout 

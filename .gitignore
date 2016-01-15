@@ -67,6 +67,7 @@ ehthumbs.db
 
 # vim
 *.swp
+*.swo
 
 # config files since they change so much, except for an example
 src/*.json
