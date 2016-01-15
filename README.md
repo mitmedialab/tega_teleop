@@ -1,5 +1,5 @@
 # tega\_teleop
-A python rosnode for teleoperating the Tega robot.
+A python rosnode for teleoperating the Tega robot and an opal tablet. Creates a Qt GUI with buttons for triggering speech, lookats, and animations on the robot, as well as commands to send to an opal tablet.
 
 ## Configure and Run
 On startup, this python node will try to connect to roscore. If roscore is not running, the program will exit. 
@@ -13,6 +13,12 @@ In a slightly more complicated script, the teleoperator may need to decide which
 
 This interface can deal with that level of complication. All you need to do is list the maximum number of different options the teleoperator will have (for example, 3) in the config file: set "options" to "3". Then, on each line of your script file, list the filenames of the teleoperator's speech options in tab-delimited format. When the script is loaded, whenever there are multiple options, these will be shown on buttons simultaneously so the teleoperator can choose which to trigger.
 
+### Opal tablet communication
+Commands to the opal tablet are sent over a rosbridge\_server websocket connection. For communication with the tablet to occur, you need to have the rosbridge\_server running, using the following command:
+
+roslaunch rosbridge\_server rosbridge\_websocket.launch
+
+You will also need to ensure that the opal tablet's config file lists the IP address or hostname of the machine running roscore.
 
 ## ROS messages
 ### SAR Opal messages

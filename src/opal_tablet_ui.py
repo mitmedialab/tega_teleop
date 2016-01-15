@@ -45,6 +45,14 @@ class opal_tablet_ui(QtGui.QWidget):
         self.sbutton.clicked.connect(lambda: self.ros_node.send_opal_message(
             OpalCommand.UNFADE_SCREEN))
         opal_layout.addWidget(self.sbutton, 2, 1)
-
-
+        # request keyframe
+        self.kbutton = QtGui.QPushButton("request keyframe", opal_box) 
+        self.kbutton.clicked.connect(lambda: self.ros_node.send_opal_message(
+            OpalCommand.REQUEST_KEYFRAME))
+        opal_layout.addWidget(self.kbutton, 3, 1)
+        # label for listing info
+        self.label = QtGui.QLabel(opal_box)
+        self.label.setText("")
+        opal_layout.addWidget(self.label, 3, 2)
+        
 
