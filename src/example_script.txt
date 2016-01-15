@@ -1,0 +1,4 @@
+hello.wav	hello
+hiTega.wav	Hi I'm Tega
+Awesome.wav	Awesome	great.wav	Great	OhCool.wav	Oh Cool
+Adios.wav	Adios
