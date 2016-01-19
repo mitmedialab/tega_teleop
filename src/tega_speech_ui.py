@@ -30,10 +30,12 @@ class tega_speech_ui(QtGui.QWidget):
         speech_box.setTitle("Speech")
 
         # get speech and add speech playback buttons to layout
-        # TODO dropdown list of available scripts to load, you pick one, it loads
+        # TODO dropdown list of available scripts to load, 
+    # you pick one, it loads
 
         # add buttons to go forward and backward in the script
-        # add buttons to pause and unpause the script (i.e., don't auto-advance)
+        # add buttons to pause and unpause the script (i.e., don't
+        # auto-advance)
         self.bbutton = QtGui.QPushButton("<< back", speech_box) 
         self.bbutton.clicked.connect(self.trigger_script_back)
         speech_layout.addWidget(self.bbutton, 0, 0)
@@ -61,9 +63,10 @@ class tega_speech_ui(QtGui.QWidget):
         speech_layout.addWidget(self.label, 1, 0, 1, 3)
 
 
-        # read config file to get script name and number of speech options per line
-        # NOTE move config parsing to main tega_teleop.py and pass script name and
-        # number of options if we add anything not script/speech-related.
+        # read config file to get script name and number of speech options 
+        # per line
+        # NOTE move config parsing to main tega_teleop.py and pass script name
+        # and number of options if we add anything not script/speech-related.
         try:
             with open("tega_teleop_config.json") as json_file:
                 json_data = json.load(json_file)
@@ -98,7 +101,7 @@ class tega_speech_ui(QtGui.QWidget):
                 for i in range(0, self.options):
                     # set button text to the button label
                     self.buttons[i] = QtGui.QPushButton(self.script_list[
-                        self.current_line][i*2-1] if i < len(self.script_list[
+                        self.current_line][i*2+1] if i < len(self.script_list[
                             self.current_line])/2 else "-", speech_box) 
                     # when clicked, call send_speech_command with the argument
                     # that is the filename for the audio to play
@@ -132,7 +135,7 @@ class tega_speech_ui(QtGui.QWidget):
                         parts) > 1 else parts[0], speech_box)
                     # send filename of audio to play when button is clicked
                     button.clicked.connect(partial(self.send_speech_command,
-                        parts[0]))
+                        parts[0], -1))
                     # make button text purple so they are distinct
                     button.setStyleSheet('QPushButton {color: purple;}')
                     speech_layout.addWidget(button, row, 3, 1, 2) 
@@ -207,7 +210,7 @@ class tega_speech_ui(QtGui.QWidget):
         for i in range(0, self.options):
             # set button text to the button label
             self.buttons[i].setText(self.script_list[self.current_line][
-                i*2-1] if i < len(self.script_list[self.current_line])/2 else "-")
+                i*2+1] if i < len(self.script_list[self.current_line])/2 else "-")
             # disconnect previous callback function
             self.buttons[i].clicked.disconnect()
             # when clicked, call send_speech_command with the argument
