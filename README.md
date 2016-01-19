@@ -4,6 +4,8 @@ A python rosnode for teleoperating the Tega robot and an opal tablet. Creates a 
 ## Configure and Run
 On startup, this python node will try to connect to roscore. If roscore is not running, the program will exit. 
 
+If this node is running on a network where DNS does not resolve local hostnames, you will need to export the environment variable $ROS\_IP to be the public IP address of this node. For example, if the machine this node is running on has the IP address "192.168.1.20", you would run the command  "export ROS\_IP=192.168.1.20" in your shell prior to starting this node.
+
 The program will also try to read in the interaction script file listed in the "tega\_teleop\_config.txt" file. There is an example interaction script file located in src/. This script file should list, in order, the filenames of all audio files that the robot will be commanded to play back during the interaction. The second column should list the words that shown on the speech buttons in the GUI (for example, the filename may be "robot\_line\_01.wav" and the words to show may be "Hi, I'm Tega"). This allows the program to be used for different interactions and different sets of audio files without having to change the python code for creating buttons.
 
 ### More on scripts
@@ -16,19 +18,20 @@ This interface can deal with that level of complication. All you need to do is l
 There is the option of including a set of "unchanging script" buttons to trigger speech. This is useful if, for example, the robot could always have the option of saying "Mmhm" and "Awesome!" regardless of the rest of the script, and if you don't want to include these phrases as options on every single line of your main script file. Following the example\_unchanging\_script.txt file, make a list with one column of audio filenames and one tab-delimited column of button labels. You probably shouldn't list more than 3-5 of these "always there" speech buttons, since otherwise the interface may start to look clunky with too many buttons.
 
 ### Opal tablet communication
-Commands to the opal tablet are sent over a rosbridge\_server websocket connection. For communication with the tablet to occur, you need to have the rosbridge\_server running, using the following command:
+Commands to the [opal tablet](https://github.com/personal-robots/SAR-opal-base) are sent over a rosbridge\_server websocket connection. For communication with the tablet to occur, you need to have the rosbridge\_server running, using the following command:
 
 roslaunch rosbridge\_server rosbridge\_websocket.launch
 
-You will also need to ensure that the opal tablet's config file lists the IP address or hostname of the machine running roscore.
+You will also need to ensure that the opal tablet's config file lists the IP address or hostname of the machine running roscore. The [opal tablet](https://github.com/personal-robots/SAR-opal-base) documentation explains how to update the config file (it's simple; you change a line in a text file and copy it to the tablet).
 
 ## ROS messages
 ### SAR Opal messages
 The program publishes "/[sar\_opal\_msgs](https://github.com/personal-robots/sar_opal_msgs "/sar_opal_msgs")/OpalCommand" to the ROS topic "opal\_tablet\_command". See [/sar\_opal\_msgs](https://github.com/personal-robots/sar_opal_msgs "/sar_opal_msgs") for more info.
 
 ### R1D1 messages
-The program publishes "/[r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs")/TegaAction" to the ROS topic "tega\_action". See "/[r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs") for more info. 
+The program publishes "/[r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs")/TegaAction" to the ROS topic "tega". See [/r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs") for more info. 
 
 ## TODO
 - Put all interaction scripts in a folder, add dropdown menu to interface so the user can select which script to load at runtime
+- Set ROS\_IP from within the python script so the user doesn't have to remember to do it
 

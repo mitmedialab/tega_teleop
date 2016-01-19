@@ -7,9 +7,9 @@ from sar_opal_msgs.msg import OpalCommand # ROS msgs
 class tega_teleop_ros():
     # ROS node
     # set up rostopics we publish
-    tablet_pub = rospy.Publisher('opal_tablet_command', OpalCommand, queue_size = 10)
-    tega_pub = rospy.Publisher('tega_action', TegaAction, queue_size = 10)
-    #r = rospy.Rate(10) # spin at 10 Hz
+    tablet_pub = rospy.Publisher('opal_tablet_command', OpalCommand,
+            queue_size = 10)
+    tega_pub = rospy.Publisher('tega', TegaAction, queue_size = 10)
 
     def __init__(self, ros_node):
         """ Initialize ROS """

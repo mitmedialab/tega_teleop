@@ -15,6 +15,11 @@ from opal_tablet_ui import opal_tablet_ui
 class tega_teleop(QtGui.QMainWindow):
     """ Tega teleoperation interface """
     # set up ROS node globally 
+    # TODO if running on network where DNS does not resolve local
+    # hostnames, get the public IP address of this machine and
+    # export to the environment variable $ROS_IP to set the public
+    # address of this node, so the user doesn't have to remember 
+    # to do this before starting the node.
     ros_node = rospy.init_node('tega_teleop', anonymous=True)
 
     def __init__(self):
