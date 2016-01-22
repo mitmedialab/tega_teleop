@@ -1,4 +1,5 @@
 {
     "script": "example_script.txt",
+    "static_script": "example_static_script.txt",
     "options": 3
 }
