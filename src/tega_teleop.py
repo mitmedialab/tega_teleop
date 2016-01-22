@@ -26,40 +26,38 @@ class tega_teleop(QtGui.QMainWindow):
         """ Initialize teleop interface """
         # setup GUI teleop interface
         super(tega_teleop, self).__init__()
-        self.setGeometry(200,100,800,750)
+        self.setGeometry(200,50,800,750)
         self.setWindowTitle("Tega Teleop")
 
         # create layout 
         self.central_widget = QtGui.QWidget(self)
         self.central_layout = QtGui.QGridLayout(self.central_widget)
         self.setCentralWidget(self.central_widget)
-        #TODO mess with row height to make GUI look better!
 
         # add label for ROS messages to update
         self.ros_label = QtGui.QLabel(self)
-        self.ros_label.setText("")
-        #self.central_layout.addWidget(self.ros_label, 3, 0,
-            #alignment=QtCore.Qt.AlignLeft)
+        self.ros_label.setText("---")
+        self.central_layout.addWidget(self.ros_label, 3, 6, 1, 1,
+            alignment=QtCore.Qt.AlignLeft)
 
         # setup ROS node publisher and subscriber
         self.ros_teleop = tega_teleop_ros(self.ros_node, self.ros_label)
 
         # add animation buttons
         anim_ui = tega_animation_ui(self.ros_teleop)
-        self.central_layout.addWidget(anim_ui, 0, 0, 1, 2)
+        self.central_layout.addWidget(anim_ui, 0, 0, 3, 7)
 
         # add lookat buttons
         lookat_ui = tega_lookat_ui(self.ros_teleop)
-        self.central_layout.addWidget(lookat_ui, 1, 1)
+        self.central_layout.addWidget(lookat_ui, 2, 3, 2, 3)
 
         # add tablet controls
         opal_ui = opal_tablet_ui(self.ros_teleop)
-        self.central_layout.addWidget(opal_ui, 1, 0)
+        self.central_layout.addWidget(opal_ui, 2, 0, 2, 3)
 
         # add robot speech buttons
         speech_ui = tega_speech_ui(self.ros_teleop)
-        self.central_layout.addWidget(speech_ui, 2, 0, 1, 2)
-        
+        self.central_layout.addWidget(speech_ui, 4, 0, 3, 7)
 
 if __name__ == '__main__':
     # initialize top-level GUI manager
