@@ -34,4 +34,8 @@ The program publishes "/[r1d1\_msgs](https://github.com/personal-robots/r1d1_msg
 ## TODO
 - Put all interaction scripts in a folder, add dropdown menu to interface so the user can select which script to load at runtime
 - Set ROS\_IP from within the python script so the user doesn't have to remember to do it
+- Adjust grid layout row height to make GUI look nicer
+- Add the file paths to folders of scripts into config file
+- Subscribe to rosmsgs for redirects/child attention
+- Could we put a list of nodes to subscribe to in the config file?
 

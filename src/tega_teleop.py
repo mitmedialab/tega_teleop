@@ -33,9 +33,16 @@ class tega_teleop(QtGui.QMainWindow):
         self.central_widget = QtGui.QWidget(self)
         self.central_layout = QtGui.QGridLayout(self.central_widget)
         self.setCentralWidget(self.central_widget)
+        #TODO mess with row height to make GUI look better!
+
+        # add label for ROS messages to update
+        self.ros_label = QtGui.QLabel(self)
+        self.ros_label.setText("")
+        #self.central_layout.addWidget(self.ros_label, 3, 0,
+            #alignment=QtCore.Qt.AlignLeft)
 
         # setup ROS node publisher and subscriber
-        self.ros_teleop = tega_teleop_ros(self.ros_node)
+        self.ros_teleop = tega_teleop_ros(self.ros_node, self.ros_label)
 
         # add animation buttons
         anim_ui = tega_animation_ui(self.ros_teleop)
