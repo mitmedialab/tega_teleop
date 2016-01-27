@@ -22,7 +22,8 @@ class tega_speech_ui(QtGui.QWidget):
     def __init__(self, ros_node):
         """ Make controls to trigger speech playback """
         super(tega_speech_ui, self).__init__()
-        # get reference to ros node so we can do callbacks to publish messages
+        # get reference to ros node so we can do callbacks to publish
+        # messages
         self.ros_node = ros_node
         
         # put buttons in a box
@@ -60,7 +61,6 @@ class tega_speech_ui(QtGui.QWidget):
         self.label = QtGui.QLabel(self.speech_box)
         self.label.setText("---")
         self.speech_layout.addWidget(self.label, 2, 0, 1, 3)
-
 
         # read config file to get script name and number of speech options 
         # per line
@@ -160,10 +160,11 @@ class tega_speech_ui(QtGui.QWidget):
                     self.current_line])/2 else "-", self.speech_box) 
                 # when clicked, call send_speech_command with the argument
                 # that is the filename for the audio to play
-                # which is the first half of the option, split on commas,
-                # because you can list an animation name after it
+                # note: the speech option may be a comma separated list
+                # where one item is the filename and one is an animation to
+                # play back before or after the file
                 self.buttons[i].clicked.connect(partial(self.send_speech_command, 
-                    self.script_list[self.current_line][i*2].split(",")[0] if i < len(
+                    self.script_list[self.current_line][i*2] if i < len(
                         self.script_list[self.current_line])/2 else "-", i))
                 # add button to layout, each button takes up three columns
                 self.speech_layout.addWidget(self.buttons[i], row, 0, 1, 3)
@@ -276,24 +277,43 @@ class tega_speech_ui(QtGui.QWidget):
         ''' update speech option buttons to go forward or back in script '''
         for i in range(0, self.options):
             # set button text to the button label
+            # if there are more buttons than speech options for this line in
+            # the script, then set the text to "-"
             self.buttons[i].setText(self.script_list[self.current_line][
                 i*2+1] if i < len(self.script_list[self.current_line])/2 else "-")
             # disconnect previous callback function
-            self.buttons[i].clicked.disconnect()
+            try:
+                self.buttons[i].clicked.disconnect()
+            except:
+                print("oops, tried to disconnect a button that wasn't connected")
             # when clicked, call send_speech_command with the argument
             # that is the filename for the audio to play
+            # if there are more buttons than speech options for this line in
+            # the script, then send a "-" when clicked instead
             self.buttons[i].clicked.connect(partial(self.send_speech_command, 
-                self.script_list[self.current_line][i*2].split(",")[0] if i < len(
+                self.script_list[self.current_line][i*2] if i < len(
                     self.script_list[self.current_line])/2 else "-", i))
-        self.label.setText("Next speech.")
+            self.label.setText("Next speech.")
 
 
     def send_speech_command(self, speech, option_num):
         ''' send speech command to robot and update speech options if necessary '''
         if (speech != "-"):
-            # call ros send speech function
-            self.ros_node.send_speech_message(speech)
-            self.label.setText("Sending speech command.")
+            # split command on commas, find out if there's just speech or
+            # also an animation listed
+            speech_parts = speech.split(",")
+
+            # send a command for each part found
+            for sp in speech_parts:
+                # if this part is an animation (all caps), send a motion command
+                if (sp.isupper()):
+                    self.ros_node.send_motion_message(sp)
+                    self.label.setText("Sending animation.")
+                # otherwise, it's a speech filename, so call ros send speech
+                else: 
+                    # call ros send speech function
+                    self.ros_node.send_speech_message(speech_parts[0])
+                    self.label.setText("Sending speech command.")
 
         # if first option and not paused, autoadvance, call trigger script forward
         if (option_num == 0 and not self.paused):
