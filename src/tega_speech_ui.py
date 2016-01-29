@@ -6,25 +6,29 @@ from functools import partial
 
 class tega_speech_ui(QtGui.QWidget):
 
-    # pause indicator
-    paused = False
 
-    # script list
-    script_list = []
-
-    # number of speech options per line in script
-    options = 1
-
-    # label for listing useful information for user
-    label = None 
-
-
-    def __init__(self, ros_node):
+    def __init__(self, ros_node, flags):
         """ Make controls to trigger speech playback """
         super(tega_speech_ui, self).__init__()
         # get reference to ros node so we can do callbacks to publish
         # messages
         self.ros_node = ros_node
+    
+        # pause indicator
+        self.paused = False
+
+        # script list
+        self.script_list = []
+
+        # number of speech options per line in script
+        self.options = 1
+
+        # label for listing useful information for user
+        self.label = None 
+
+        # get reference to shared flags, such as whether child is attending
+        # or not 
+        self.flags = flags
         
         # put buttons in a box
         self.speech_box = QtGui.QGroupBox(self)
@@ -115,7 +119,7 @@ class tega_speech_ui(QtGui.QWidget):
         if ("static_script" in json_data):
             self.load_static_script(json_data["static_script"])
         else:
-            print("Should there be an unchanging script? Is your config file correct?")
+            print("Should there be a static script in your config file?")
 
 
     def load_script(self, script_filename):
@@ -191,7 +195,7 @@ class tega_speech_ui(QtGui.QWidget):
             print "No static script buttons yet... let's set some up."
 
         # make new list of buttons for the static script options
-        self.static_buttons = [None]
+        self.static_buttons = []
 
         try:
             row = 3 
@@ -318,3 +322,30 @@ class tega_speech_ui(QtGui.QWidget):
         # if first option and not paused, autoadvance, call trigger script forward
         if (option_num == 0 and not self.paused):
             self.trigger_script_forward()
+
+        # TODO move project-specific stuff like the redirects and child attention
+        # label to a forked version of the project OR add a project-specific 
+        # python file to load where you add any project-specific buttons to the
+        # interface -- something to make this cleaner. Anyway:
+        #
+        # if we are using redirects, and if the child is not attending,
+        # highlight the redirects so the teleoperator will know to click one 
+        #
+        # NOTE there may be a better way of doing this - the coloring is 
+        # dependent on the value of the flag when we send speech, and it could
+        # be that the child is not attending for a bit but comes back before
+        # it's time to send more speech, so we might want to play a redirect
+        # since they were distracted, but the color won't change for that...
+        # the point is, we could track how much the child has been attending
+        # since the last time we changed the button colors or sent speech, and 
+        # use that to determine whether we should suggest playing another 
+        # redirect or not.
+        print self.flags.child_is_attending 
+        if self.flags.child_is_attending:
+            for sb in self.static_buttons:
+                sb.setStyleSheet('QPushButton {color: purple;}')
+        else:
+            for sb in self.static_buttons:
+                sb.setStyleSheet('QPushButton {color: red;}')
+
+       

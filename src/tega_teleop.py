@@ -11,6 +11,7 @@ from tega_animation_ui import tega_animation_ui
 from tega_lookat_ui import tega_lookat_ui
 from tega_speech_ui import tega_speech_ui
 from opal_tablet_ui import opal_tablet_ui
+from tega_teleop_flags import tega_teleop_flags
 
 class tega_teleop(QtGui.QMainWindow):
     """ Tega teleoperation interface """
@@ -40,8 +41,16 @@ class tega_teleop(QtGui.QMainWindow):
         self.central_layout.addWidget(self.ros_label, 3, 6, 1, 1,
             alignment=QtCore.Qt.AlignLeft)
 
+        # we have a boolean to flag whether child is attending or not based
+        # on data coming in on the /child_attention topic from ROS
+        # TODO this is a project-specific flag - need to revise how this
+        # is done so that project-specific stuff can be swapped out for 
+        # new projects
+        self.flags = tega_teleop_flags()
+
         # setup ROS node publisher and subscriber
-        self.ros_teleop = tega_teleop_ros(self.ros_node, self.ros_label)
+        self.ros_teleop = tega_teleop_ros(self.ros_node, self.ros_label, 
+               self.flags)
 
         # add animation buttons
         anim_ui = tega_animation_ui(self.ros_teleop)
@@ -55,8 +64,9 @@ class tega_teleop(QtGui.QMainWindow):
         opal_ui = opal_tablet_ui(self.ros_teleop)
         self.central_layout.addWidget(opal_ui, 2, 0, 2, 3)
 
-        # add robot speech buttons
-        speech_ui = tega_speech_ui(self.ros_teleop)
+        # add robot script playback buttons (mostly speech, but the scripts
+        # can also list animations to play before or after an audio file)
+        speech_ui = tega_speech_ui(self.ros_teleop, self.flags)
         self.central_layout.addWidget(speech_ui, 4, 0, 3, 7)
 
 if __name__ == '__main__':
