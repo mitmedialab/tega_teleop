@@ -3,6 +3,7 @@ from tega_teleop_ros import tega_teleop_ros
 import json
 import glob
 from functools import partial
+import time
 
 class tega_speech_ui(QtGui.QWidget):
 
@@ -307,6 +308,9 @@ class tega_speech_ui(QtGui.QWidget):
             # also an animation listed
             speech_parts = speech.split(",")
 
+            # TODO subscribe to tega_state, check if tega is speaking or moving
+            # before sending a new command
+
             # send a command for each part found
             for sp in speech_parts:
                 # if this part is an animation (all caps), send a motion command
@@ -316,8 +320,9 @@ class tega_speech_ui(QtGui.QWidget):
                 # otherwise, it's a speech filename, so call ros send speech
                 else: 
                     # call ros send speech function
-                    self.ros_node.send_speech_message(speech_parts[0])
+                    self.ros_node.send_speech_message(sp)
                     self.label.setText("Sending speech command.")
+                time.sleep(2)
 
         # if first option and not paused, autoadvance, call trigger script forward
         if (option_num == 0 and not self.paused):
@@ -340,7 +345,7 @@ class tega_speech_ui(QtGui.QWidget):
         # since the last time we changed the button colors or sent speech, and 
         # use that to determine whether we should suggest playing another 
         # redirect or not.
-        print self.flags.child_is_attending 
+        print self.flags.child_is_attending
         if self.flags.child_is_attending:
             for sb in self.static_buttons:
                 sb.setStyleSheet('QPushButton {color: purple;}')
