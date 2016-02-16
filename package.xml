@@ -2,24 +2,25 @@
 <package>
   <name>tega_teleop</name>
   <version>0.0.0</version>
-  <description>The tega_teleop package</description>
+  <description>An interface to remotely teleoperate the Tega robot</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="jakory@todo.todo">jakory</maintainer>
+  <maintainer email="jakory@media.mit.edu">jakory</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
   <!-- Commonly used license strings: -->
   <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
-  <license>TODO</license>
+  <license>MIT</license>
 
 
   <!-- Url tags are optional, but mutiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
   <!-- <url type="website">http://wiki.ros.org/tega_teleop</url> -->
+  <url type="website">https://github.com/personal-robots/tega_teleop</url>
 
 
   <!-- Author tags are optional, mutiple are allowed, one per tag -->
