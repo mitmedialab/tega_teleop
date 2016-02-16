@@ -36,15 +36,22 @@ You will also need to ensure that the opal tablet's config file lists the IP add
 
 ## ROS messages
 ### SAR Opal messages
-The program publishes "/[sar\_opal\_msgs](https://github.com/personal-robots/sar_opal_msgs "/sar_opal_msgs")/OpalCommand" to the ROS topic "opal\_tablet\_command". See [/sar\_opal\_msgs](https://github.com/personal-robots/sar_opal_msgs "/sar_opal_msgs") for more info.
+The program publishes "/[sar\_opal\_msgs](https://github.com/personal-robots/sar_opal_msgs "/sar_opal_msgs")/OpalCommand" to the ROS topic "/opal\_tablet\_command". See [/sar\_opal\_msgs](https://github.com/personal-robots/sar_opal_msgs "/sar_opal_msgs") for more info.
 
 ### R1D1 messages
-The program publishes "/[r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs")/TegaAction" to the ROS topic "tega". See [/r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs") for more info. 
+The program publishes "/[r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs")/TegaAction" to the ROS topic "/tega". 
+
+The program subscribes to "/[r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs")/TegaState" on the ROS topic "/tega\_state". 
+
+See [/r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs") for more info. 
+
+### Affdex attention messages
+The program subscribes to Boolean (True/False) messages on the ROS topic "/child\_attention". These messages indicate whether a child is attending to the robot/tablet setup or not.
 
 ## TODO
 - Set ROS\_IP from within the python script so the user doesn't have to remember to do it
 - Adjust grid layout row height to make GUI look nicer
 - Add the file paths to folders of scripts into config file
-- Subscribe to rosmsgs for redirects/child attention
 - Could we put a list of nodes to subscribe to in the config file?
+- Move project-specific stuff to a separate script; make it so project-specific stuff can easily be swapped out for different projects
 

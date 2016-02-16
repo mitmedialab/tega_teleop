@@ -308,11 +308,14 @@ class tega_speech_ui(QtGui.QWidget):
             # also an animation listed
             speech_parts = speech.split(",")
 
-            # TODO subscribe to tega_state, check if tega is speaking or moving
-            # before sending a new command
-
             # send a command for each part found
             for sp in speech_parts:
+                # wait until tega is not speaking or moving, then send the
+                # next command
+                while (self.flags.tega_is_playing_sound
+                       or self.flags.tega_is_doing_motion):
+                    time.sleep(1)
+
                 # if this part is an animation (all caps), send a motion command
                 if (sp.isupper()):
                     self.ros_node.send_motion_message(sp)
@@ -322,7 +325,6 @@ class tega_speech_ui(QtGui.QWidget):
                     # call ros send speech function
                     self.ros_node.send_speech_message(sp)
                     self.label.setText("Sending speech command.")
-                time.sleep(2)
 
         # if first option and not paused, autoadvance, call trigger script forward
         if (option_num == 0 and not self.paused):

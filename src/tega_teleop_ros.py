@@ -30,6 +30,7 @@ class tega_teleop_ros():
         # not the affdex camera is recognizing a person's face looking in
         # generally the right direction
         rospy.Subscriber('child_attention', Bool, self.on_child_attn_msg)
+        rospy.Subscriber('tega_state', TegaState, self.on_tega_state_msg)
 
     def send_opal_message(self, command):
         """ Publish opal command message """
@@ -69,12 +70,19 @@ class tega_teleop_ros():
     def on_child_attn_msg(self, data):
         # when we get child attention messages, set a label to say whether the
         # child is attending or not, and also set a flag
+        self.flags.child_is_attending = data.data
         if data.data:
             self.ros_label.setText("Child is ATTENDING")
-            #self.is_attending = True
-            self.flags.child_is_attending = True
         else:
             self.ros_label.setText("Child is NOT ATTENDING")
-            #self.is_attending = False
-            self.flags.child_is_attending = False
 
+    def on_tega_state_msg(self, data):
+        # when we get tega state messages, set a flag indicating whether the
+        # robot is in motion or playing sound or not
+        self.flags.tega_is_playing_sound = data.is_playing_sound
+        
+        # Instead of giving us a boolean to indicate whether tega is in motion
+        # or not, we get the name of the animation. Let's check whether it is
+        # our "idle" animation (usually, the idle animation is either
+        # MOTION_IDLESTILL or MOTION_BREATHING).
+        self.flags.tega_is_doing_motion = data.doing_motion
