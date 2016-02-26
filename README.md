@@ -30,7 +30,7 @@ One more thing on scripts. The interface will load a list of scripts located in 
 ### Opal tablet communication
 Commands to the [opal tablet](https://github.com/personal-robots/SAR-opal-base) are sent over a rosbridge\_server websocket connection. For communication with the tablet to occur, you need to have the rosbridge\_server running, using the following command:
 
-roslaunch rosbridge\_server rosbridge\_websocket.launch
+`roslaunch rosbridge\_server rosbridge\_websocket.launch`
 
 You will also need to ensure that the opal tablet's config file lists the IP address or hostname of the machine running roscore. The [opal tablet](https://github.com/personal-robots/SAR-opal-base) documentation explains how to update the config file (it's simple; you change a line in a text file and copy it to the tablet).
 
