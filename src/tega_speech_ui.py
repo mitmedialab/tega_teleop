@@ -328,6 +328,7 @@ class tega_speech_ui(QtGui.QWidget):
                     self.label.setText("Sending speech command.")
                 time.sleep(0.5)
 
+        speech = "-"
         # if first option and not paused, autoadvance, call trigger script forward
         if (option_num == 0 and not self.paused):
             self.trigger_script_forward()
