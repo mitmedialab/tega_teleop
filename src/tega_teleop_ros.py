@@ -29,6 +29,7 @@ from r1d1_msgs.msg import TegaAction # ROS msgs to talk to Tega
 from r1d1_msgs.msg import TegaState # ROS msgs to get info from Tega
 from sar_opal_msgs.msg import OpalCommand # ROS msgs to talk to tablet
 from std_msgs.msg import Bool # for child_attention topic
+from std_msgs.msg import Header # standard ROS msg header
 
 class tega_teleop_ros():
     # ROS node
@@ -61,6 +62,9 @@ class tega_teleop_ros():
         """ Publish opal command message """
         print 'sending opal command: %s' % command
         msg = OpalCommand()
+        # add header
+        msg.header = Header()
+        msg.header.stamp = rospy.Time.now()
         msg.command = command
         self.tablet_pub.publish(msg)
         rospy.loginfo(msg)
