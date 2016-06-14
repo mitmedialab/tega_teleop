@@ -48,6 +48,22 @@ See [/r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs") for
 ### Affdex attention messages
 The program subscribes to Boolean (True/False) messages on the ROS topic "/child\_attention". These messages indicate whether a child is attending to the robot/tablet setup or not.
 
+## Version Notes
+
+This program was developed and tested with:
+
+- Python 2.7.6
+- ROS Indigo
+- [sar\_opal\_msgs](https://github.com/personal-robots/sar_opal_msgs
+  "/sar_opal_msgs") 2.2.0
+- [r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs) 2.0.0
+- Ubuntu 14.04 LTS (64-bit)
+
+## Bugs and issues
+
+Please report all bugs and issues on the [tega\_teleop github issues
+page](https://github.com/personal-robots/tega_teleop/issues).
+
 ## TODO
 - Set ROS\_IP from within the python script so the user doesn't have to remember to do it
 - Adjust grid layout row height to make GUI look nicer
