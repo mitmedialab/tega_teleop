@@ -92,6 +92,8 @@ class tega_speech_ui(QtGui.QWidget):
         self.label.setText("---")
         self.speech_layout.addWidget(self.label, 2, 0, 1, 3)
 
+        json_data=[]
+
         # read config file to get script name and number of speech options 
         # per line
         # NOTE move config parsing to main tega_teleop.py and pass script name
