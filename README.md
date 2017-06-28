@@ -2,7 +2,7 @@
 A python rosnode for teleoperating the Tega robot and an opal tablet. Creates a Qt GUI with buttons for triggering speech, lookats, and animations on the robot, as well as commands to send to an opal tablet.
 
 ## Configure and Run
-On startup, this python node will try to connect to roscore. If roscore is not running, the program will exit. 
+On startup, this python node will try to connect to roscore. If roscore is not running, the program will exit.
 
 If this node is running on a network where DNS does not resolve local hostnames, you will need to export the environment variable $ROS\_IP and $ROS\_HOSTNAME to be the public IP address of this node. For example, if the machine this node is running on has the IP address "192.168.1.20", you would run the commands `export ROS\_IP=192.168.1.20` and `export ROS\_HOSTNAME=192.168.1.20` in your shell prior to starting this node. If this IP is static, you may want to put these commands in your bashrc file (or other shell rc file)  so you don't have to remember to run them every time.
 
@@ -20,7 +20,7 @@ This interface can deal with that level of complication. All you need to do is l
 You can also list motions/animations to play back along with an audio file: \[filename1,MOTION label1 filename2,MOTION etc.\]. When the button is clicked, the interface will send both a "play audio" message with the audio filename and a "do motion" message with the animation to play. If you list the filename first, the play audio message will be sent first; if you list the animation name first, the do motion message will be sent first. It is, however, up to the robot code to determine if these are cued or whether they play simultaneously, so make sure to test it for your use case.
 
 #### Static scripts
-There is the option of including a set of "static script" buttons to trigger speech. This is useful if, for example, the robot could always have the option of saying "Mmhm" and "Awesome!" regardless of the rest of the script, and if you don't want to include these phrases as options on every single line of your main script file. Following the example\_static\_script.txt file, make a list with one column of audio filenames and one tab-delimited column of button labels. 
+There is the option of including a set of "static script" buttons to trigger speech. This is useful if, for example, the robot could always have the option of saying "Mmhm" and "Awesome!" regardless of the rest of the script, and if you don't want to include these phrases as options on every single line of your main script file. Following the example\_static\_script.txt file, make a list with one column of audio filenames and one tab-delimited column of button labels.
 
 You probably shouldn't list more than 3-5 of these "always there" speech buttons, since otherwise the interface may start to look clunky with too many buttons.
 
@@ -41,9 +41,9 @@ The program publishes "/[sar\_opal\_msgs](https://github.com/personal-robots/sar
 ### R1D1 messages
 The program publishes "/[r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs")/TegaAction" to the ROS topic "/tega". 
 
-The program subscribes to "/[r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs")/TegaState" on the ROS topic "/tega\_state". 
+The program subscribes to "/[r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs")/TegaState" on the ROS topic "/tega\_state".
 
-See [/r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs") for more info. 
+See [/r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs") for more info.
 
 ### Affdex attention messages
 The program subscribes to Boolean (True/False) messages on the ROS topic "/child\_attention". These messages indicate whether a child is attending to the robot/tablet setup or not.
@@ -58,6 +58,8 @@ This program was developed and tested with:
   "/sar_opal_msgs") 2.2.0
 - [r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs) 2.0.0
 - Ubuntu 14.04 LTS (64-bit)
+
+The Cyber4 study was run using tega\_teleop v1.0.1.
 
 ## Bugs and issues
 

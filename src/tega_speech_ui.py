@@ -4,17 +4,17 @@
 # The MIT License (MIT)
 #
 # Copyright (c) 2016 Personal Robots Group
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -39,7 +39,7 @@ class tega_speech_ui(QtGui.QWidget):
         # get reference to ros node so we can do callbacks to publish
         # messages
         self.ros_node = ros_node
-    
+
         # pause indicator
         self.paused = False
 
@@ -50,40 +50,40 @@ class tega_speech_ui(QtGui.QWidget):
         self.options = 1
 
         # label for listing useful information for user
-        self.label = None 
+        self.label = None
 
         # get reference to shared flags, such as whether child is attending
-        # or not 
+        # or not
         self.flags = flags
-        
+
         # put buttons in a box
         self.speech_box = QtGui.QGroupBox(self)
         self.speech_layout = QtGui.QGridLayout(self.speech_box)
         self.speech_box.setTitle("Speech")
 
         # get speech and add speech playback buttons to layout:
-       
+
         # add buttons to go forward and backward in the script
         # add buttons to pause and unpause the script (i.e., don't
         # auto-advance)
-        self.bbutton = QtGui.QPushButton("<< back", self.speech_box) 
+        self.bbutton = QtGui.QPushButton("<< back", self.speech_box)
         self.bbutton.clicked.connect(self.trigger_script_back)
         self.speech_layout.addWidget(self.bbutton, 1, 0)
 
-        self.pbutton = QtGui.QPushButton("-- pause --", self.speech_box) 
+        self.pbutton = QtGui.QPushButton("-- pause --", self.speech_box)
         self.pbutton.clicked.connect(self.toggle_pause)
         self.speech_layout.addWidget(self.pbutton, 1, 1)
 
-        self.fbutton = QtGui.QPushButton("forward >>", self.speech_box) 
+        self.fbutton = QtGui.QPushButton("forward >>", self.speech_box)
         self.fbutton.clicked.connect(self.trigger_script_forward)
         self.speech_layout.addWidget(self.fbutton, 1, 2)
 
-        self.sbutton = QtGui.QPushButton("[jump to start]", self.speech_box) 
+        self.sbutton = QtGui.QPushButton("[jump to start]", self.speech_box)
         self.sbutton.clicked.connect(self.trigger_script_beginning)
         self.sbutton.setStyleSheet('QPushButton {color: gray;}')
         self.speech_layout.addWidget(self.sbutton, 1, 3)
 
-        self.ebutton = QtGui.QPushButton("[jump to end]", self.speech_box) 
+        self.ebutton = QtGui.QPushButton("[jump to end]", self.speech_box)
         self.ebutton.clicked.connect(self.trigger_script_end)
         self.ebutton.setStyleSheet('QPushButton {color: gray;}')
         self.speech_layout.addWidget(self.ebutton, 1, 4)
@@ -94,7 +94,7 @@ class tega_speech_ui(QtGui.QWidget):
 
         json_data=[]
 
-        # read config file to get script name and number of speech options 
+        # read config file to get script name and number of speech options
         # per line
         # NOTE move config parsing to main tega_teleop.py and pass script name
         # and number of options if we add anything not script/speech-related.
@@ -113,7 +113,7 @@ class tega_speech_ui(QtGui.QWidget):
             pass
 
         # TODO add the file paths to folders of scripts into config file!
-        # make a dropdown list of available scripts to load 
+        # make a dropdown list of available scripts to load
         # user picks one, it loads
         script_box_label = QtGui.QLabel(self.speech_box)
         script_box_label.setText("Pick a script to load: ")
@@ -124,7 +124,7 @@ class tega_speech_ui(QtGui.QWidget):
         self.script_list_box.activated['QString'].connect(self.load_script)
         self.speech_layout.addWidget(self.script_list_box, 0, 1, 1, 2)
 
-        # make a dropdown list of available static scripts to load 
+        # make a dropdown list of available static scripts to load
         # user picks one, it loads
         self.static_script_list_box = QtGui.QComboBox(self)
         static_script_file_list = glob.glob('../static_scripts/*.txt')
@@ -178,10 +178,10 @@ class tega_speech_ui(QtGui.QWidget):
                     b = None
             except AttributeError:
                 print "No script buttons yet... let's set some up."
-                
+
             # make new array of buttons for the number of speech options
             # that this new script to load has
-            self.buttons = [None] * self.options 
+            self.buttons = [None] * self.options
 
             # each script line follows the pattern:
             # filename1 label1 filename2 label2 ... etc.
@@ -189,13 +189,13 @@ class tega_speech_ui(QtGui.QWidget):
                 # set button text to the button label
                 self.buttons[i] = QtGui.QPushButton(self.script_list[
                 self.current_line][i*2+1] if i < len(self.script_list[
-                    self.current_line])/2 else "-", self.speech_box) 
+                    self.current_line])/2 else "-", self.speech_box)
                 # when clicked, call send_speech_command with the argument
                 # that is the filename for the audio to play
                 # note: the speech option may be a comma separated list
                 # where one item is the filename and one is an animation to
                 # play back before or after the file
-                self.buttons[i].clicked.connect(partial(self.send_speech_command, 
+                self.buttons[i].clicked.connect(partial(self.send_speech_command,
                     self.script_list[self.current_line][i*2] if i < len(
                         self.script_list[self.current_line])/2 else "-", i))
                 # add button to layout, each button takes up three columns
@@ -209,7 +209,7 @@ class tega_speech_ui(QtGui.QWidget):
         except:
             print ("Could not read script file! Is filename in config correct?")
             self.label.setText("Could not read script file!")
-        
+
 
     def load_static_script(self, script_filename):
         ''' load a script file '''
@@ -226,7 +226,7 @@ class tega_speech_ui(QtGui.QWidget):
         self.static_buttons = []
 
         try:
-            row = 3 
+            row = 3
             static_script = open(script_filename)
 
             for line in static_script:
@@ -239,7 +239,7 @@ class tega_speech_ui(QtGui.QWidget):
                     parts[0].split(",")[0], -1))
                 # make button text purple so they are distinct
                 button.setStyleSheet('QPushButton {color: purple;}')
-                self.speech_layout.addWidget(button, row, 3, 1, 2) 
+                self.speech_layout.addWidget(button, row, 3, 1, 2)
                 self.static_buttons.append(button)
                 row += 1
         except:
@@ -268,7 +268,7 @@ class tega_speech_ui(QtGui.QWidget):
 
     def trigger_script_end(self):
         ''' go to end of script '''
-        self.current_line = len(self.script_list) - 1 
+        self.current_line = len(self.script_list) - 1
         self.update_speech_options()
         self.label.setText("At end of script.")
 
@@ -287,7 +287,7 @@ class tega_speech_ui(QtGui.QWidget):
 
         self.current_line -= 1
         self.update_speech_options()
-         
+
 
     def trigger_script_forward(self):
         ''' go to the next line in the script '''
@@ -322,7 +322,7 @@ class tega_speech_ui(QtGui.QWidget):
             # that is the filename for the audio to play
             # if there are more buttons than speech options for this line in
             # the script, then send a "-" when clicked instead
-            self.buttons[i].clicked.connect(partial(self.send_speech_command, 
+            self.buttons[i].clicked.connect(partial(self.send_speech_command,
                 self.script_list[self.current_line][i*2] if i < len(
                     self.script_list[self.current_line])/2 else "-", i))
             self.label.setText("Next speech.")
@@ -349,7 +349,7 @@ class tega_speech_ui(QtGui.QWidget):
                     self.ros_node.send_motion_message(sp)
                     self.label.setText("Sending animation.")
                 # otherwise, it's a speech filename, so call ros send speech
-                else: 
+                else:
                     # call ros send speech function
                     self.ros_node.send_speech_message(sp)
                     self.label.setText("Sending speech command.")
@@ -361,21 +361,21 @@ class tega_speech_ui(QtGui.QWidget):
             self.trigger_script_forward()
 
         # TODO move project-specific stuff like the redirects and child attention
-        # label to a forked version of the project OR add a project-specific 
+        # label to a forked version of the project OR add a project-specific
         # python file to load where you add any project-specific buttons to the
         # interface -- something to make this cleaner. Anyway:
         #
         # if we are using redirects, and if the child is not attending,
-        # highlight the redirects so the teleoperator will know to click one 
+        # highlight the redirects so the teleoperator will know to click one
         #
-        # NOTE there may be a better way of doing this - the coloring is 
+        # NOTE there may be a better way of doing this - the coloring is
         # dependent on the value of the flag when we send speech, and it could
         # be that the child is not attending for a bit but comes back before
         # it's time to send more speech, so we might want to play a redirect
         # since they were distracted, but the color won't change for that...
         # the point is, we could track how much the child has been attending
-        # since the last time we changed the button colors or sent speech, and 
-        # use that to determine whether we should suggest playing another 
+        # since the last time we changed the button colors or sent speech, and
+        # use that to determine whether we should suggest playing another
         # redirect or not.
         print self.flags.child_is_attending
         if self.flags.child_is_attending:
@@ -385,4 +385,4 @@ class tega_speech_ui(QtGui.QWidget):
             for sb in self.static_buttons:
                 sb.setStyleSheet('QPushButton {color: red;}')
 
-       
+

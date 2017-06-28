@@ -6,17 +6,17 @@
 # The MIT License (MIT)
 #
 # Copyright (c) 2016 Personal Robots Group
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -40,11 +40,11 @@ from tega_teleop_flags import tega_teleop_flags
 
 class tega_teleop(QtGui.QMainWindow):
     """ Tega teleoperation interface """
-    # set up ROS node globally 
+    # set up ROS node globally
     # TODO if running on network where DNS does not resolve local
     # hostnames, get the public IP address of this machine and
     # export to the environment variable $ROS_IP to set the public
-    # address of this node, so the user doesn't have to remember 
+    # address of this node, so the user doesn't have to remember
     # to do this before starting the node.
     ros_node = rospy.init_node('tega_teleop', anonymous=True)
 
@@ -55,7 +55,7 @@ class tega_teleop(QtGui.QMainWindow):
         self.setGeometry(200,50,800,750)
         self.setWindowTitle("Tega Teleop")
 
-        # create layout 
+        # create layout
         self.central_widget = QtGui.QWidget(self)
         self.central_layout = QtGui.QGridLayout(self.central_widget)
         self.setCentralWidget(self.central_widget)
@@ -69,12 +69,12 @@ class tega_teleop(QtGui.QMainWindow):
         # we have a boolean to flag whether child is attending or not based
         # on data coming in on the /child_attention topic from ROS
         # TODO this is a project-specific flag - need to revise how this
-        # is done so that project-specific stuff can be swapped out for 
+        # is done so that project-specific stuff can be swapped out for
         # new projects
         self.flags = tega_teleop_flags()
 
         # setup ROS node publisher and subscriber
-        self.ros_teleop = tega_teleop_ros(self.ros_node, self.ros_label, 
+        self.ros_teleop = tega_teleop_ros(self.ros_node, self.ros_label,
                self.flags)
 
         # add animation buttons
@@ -104,7 +104,7 @@ if __name__ == '__main__':
         teleop_window.show()
 
     # if roscore isn't running or shuts down unexpectedly
-    except rospy.ROSInterruptException: 
+    except rospy.ROSInterruptException:
         print ('ROS node shutdown')
         pass
 
