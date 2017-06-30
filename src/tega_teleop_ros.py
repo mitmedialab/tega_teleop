@@ -30,16 +30,13 @@ from r1d1_msgs.msg import TegaState # ROS msgs to get info from Tega
 from sar_opal_msgs.msg import OpalCommand # ROS msgs to talk to tablet
 from std_msgs.msg import Bool # for child_attention topic
 from std_msgs.msg import Header # standard ROS msg header
+from rr_msgs.msg import EntrainAudio # Send audio to the audio entrainer.
+from rr_msgs.msg import InteractionState # Send state to the audio entrainer.
 
 class tega_teleop_ros():
     # ROS node
-    # set up rostopics we publish: commands to the tablet and commands
-    # to Tega
-    tablet_pub = rospy.Publisher('opal_tablet_command', OpalCommand,
-            queue_size = 10)
-    tega_pub = rospy.Publisher('tega', TegaAction, queue_size = 10)
 
-    def __init__(self, ros_node, ros_label, flags):
+    def __init__(self, ros_node, ros_label, flags, use_entrainer):
         """ Initialize ROS """
         # we get a reference to the main ros node so we can do callbacks
         # to publish messages, and subscribe to stuff
@@ -57,6 +54,20 @@ class tega_teleop_ros():
         # generally the right direction
         rospy.Subscriber('child_attention', Bool, self.on_child_attn_msg)
         rospy.Subscriber('tega_state', TegaState, self.on_tega_state_msg)
+
+        # We will publish commands to the tablet and commands to the robot.
+        # We might send audio to the audio entrainer on its way to the robot.
+        # TODO it may be worthwhile to put the topic names in the config file.
+        self.tablet_pub = rospy.Publisher('opal_tablet_command', OpalCommand,
+                queue_size = 10)
+        self.tega_pub = rospy.Publisher('tega', TegaAction, queue_size = 10)
+
+        if use_entrainer:
+            self.entrain_pub = rospy.Publisher('rr/entrain_audio', EntrainAudio,
+                    queue_size = 10)
+            self.state_pub = rospy.Publisher('rr/state', InteractionState,
+                    queue_size = 10)
+
 
     def send_opal_message(self, command):
         """ Publish opal command message """
@@ -94,6 +105,26 @@ class tega_teleop_ros():
         msg.do_sound_playback = True
         msg.wav_filename = speech
         self.tega_pub.publish(msg)
+        rospy.loginfo(msg)
+
+    def send_entrain_audio_message(self, speech, age):
+        """ Publish EntrainAudio message. """
+        print '\nsending entrain speech message: %s' % speech
+        msg = EntrainAudio()
+        msg.header = Header()
+        msg.header.stamp = rospy.Time.now()
+        msg.audio = speech
+        msg.age = age
+        self.entrain_pub.publish(msg)
+        rospy.loginfo(msg)
+
+    def send_interaction_state_message(self, state):
+        """ Publish InteractionState message. """
+        print '\nsending interaction state message: %s' % state
+        msg = InteractionState()
+        msg.header = Header()
+        msg.header.stamp = rospy.Time.now()
+        self.state.publish(msg)
         rospy.loginfo(msg)
 
     def on_child_attn_msg(self, data):

@@ -26,6 +26,7 @@
 # SOFTWARE.
 
 import sys # exit and argv
+import argparse # command line args
 import rospy # ROS
 from PySide import QtGui, QtCore # basic GUI stuff
 from r1d1_msgs.msg import TegaAction # ROS msgs
@@ -48,7 +49,7 @@ class tega_teleop(QtGui.QMainWindow):
     # to do this before starting the node.
     ros_node = rospy.init_node('tega_teleop', anonymous=True)
 
-    def __init__(self):
+    def __init__(self, use_entrainer):
         """ Initialize teleop interface """
         # setup GUI teleop interface
         super(tega_teleop, self).__init__()
@@ -75,7 +76,7 @@ class tega_teleop(QtGui.QMainWindow):
 
         # setup ROS node publisher and subscriber
         self.ros_teleop = tega_teleop_ros(self.ros_node, self.ros_label,
-               self.flags)
+               self.flags, use_entrainer)
 
         # add animation buttons
         anim_ui = tega_animation_ui(self.ros_teleop)
@@ -91,16 +92,35 @@ class tega_teleop(QtGui.QMainWindow):
 
         # add robot script playback buttons (mostly speech, but the scripts
         # can also list animations to play before or after an audio file)
-        speech_ui = tega_speech_ui(self.ros_teleop, self.flags)
+        speech_ui = tega_speech_ui(self.ros_teleop, self.flags, use_entrainer)
         self.central_layout.addWidget(speech_ui, 4, 0, 3, 7)
 
 if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description='''Send commands to a Tega robot and an Opal device. Creates
+            a Qt GUI with buttons for triggering speech, lookats, and
+            animations on the robot, as well as commands to send to an Opal
+            device. Load custom scripts for robot behavior, and optionally send
+            audio through an audio entrainer module on the way to the robot.
+            ''')
+    # The user can decide to send audio directly to the robot or to go through
+    # the audio entrainment module first.
+    parser.add_argument("-e", "--use-entrainer", action='store_true',
+            default=False, dest="use_entrainer",
+            help="Send audio to the audio entrainer on the way to the robot.")
+
+    # Get arguments.
+    args = parser.parse_args()
+    print(args)
+
     # initialize top-level GUI manager
     app = QtGui.QApplication(sys.argv)
 
     # start teleop interface
     try:
-        teleop_window = tega_teleop()
+        teleop_window = tega_teleop(args.use_entrainer)
         teleop_window.show()
 
     # if roscore isn't running or shuts down unexpectedly

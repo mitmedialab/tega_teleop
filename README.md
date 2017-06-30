@@ -2,6 +2,15 @@
 A python rosnode for teleoperating the Tega robot and an opal tablet. Creates a Qt GUI with buttons for triggering speech, lookats, and animations on the robot, as well as commands to send to an opal tablet.
 
 ## Configure and Run
+
+
+`python tega_teleop.py [-h] [-e]`
+
+optional arguments:
+    - `-h`, `--help`: show this help message and exit
+    - `-e`, `--use-entrainer`: Send audio to the audio entrainer on the way to
+      the robot.
+
 On startup, this python node will try to connect to roscore. If roscore is not running, the program will exit.
 
 If this node is running on a network where DNS does not resolve local hostnames, you will need to export the environment variable $ROS\_IP and $ROS\_HOSTNAME to be the public IP address of this node. For example, if the machine this node is running on has the IP address "192.168.1.20", you would run the commands `export ROS\_IP=192.168.1.20` and `export ROS\_HOSTNAME=192.168.1.20` in your shell prior to starting this node. If this IP is static, you may want to put these commands in your bashrc file (or other shell rc file)  so you don't have to remember to run them every time.
@@ -48,6 +57,16 @@ See [/r1d1\_msgs](https://github.com/mitmedialab/r1d1_msgs "/r1d1_msgs") for mor
 ### Affdex attention messages
 The program subscribes to Boolean (True/False) messages on the ROS topic "/child\_attention". These messages indicate whether a child is attending to the robot/tablet setup or not.
 
+### Relational robot messages
+
+The node publishes
+"/[rr_msgs](https://github.com/mitmedialab/rr_msgs)/EntrainAudio" messages on
+the ROS topic "/rr/entrain_audio".
+
+The node also publishes
+"/[rr_msgs](https://github.com/mitmedialab/rr_msgs)/InteractionState" messages
+on the ROS topic "/rr/state".
+
 ## Version Notes
 
 This program was developed and tested with:
@@ -55,9 +74,10 @@ This program was developed and tested with:
 - Python 2.7.6
 - ROS Indigo
 - [sar\_opal\_msgs](https://github.com/mitmedialab/sar_opal_msgs
-  "/sar_opal_msgs") 2.2.0
-- [r1d1\_msgs](https://github.com/mitmedialab/r1d1_msgs) 2.0.0
-- Ubuntu 14.04 LTS (64-bit)
+  "/sar_opal_msgs") 4.0.0
+- [r1d1\_msgs](https://github.com/mitmedialab/r1d1_msgs) 4.0.0
+- [rr\_msgs](https://github.com/mitmedialab/rr_msgs) 1.0.0
+- Ubuntu 14.04 LTS (32-bit)
 
 The Cyber4 study was run using tega\_teleop v1.0.1.
 

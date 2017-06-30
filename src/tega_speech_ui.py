@@ -33,12 +33,16 @@ import time
 class tega_speech_ui(QtGui.QWidget):
 
 
-    def __init__(self, ros_node, flags):
+    def __init__(self, ros_node, flags, use_entrainer):
         """ Make controls to trigger speech playback """
         super(tega_speech_ui, self).__init__()
         # get reference to ros node so we can do callbacks to publish
         # messages
         self.ros_node = ros_node
+
+        # If we are using the audio entrainment module, speech will be sent
+        # there instead of directly to the robot.
+        self.use_entrainer = use_entrainer
 
         # pause indicator
         self.paused = False
@@ -68,29 +72,29 @@ class tega_speech_ui(QtGui.QWidget):
         # auto-advance)
         self.bbutton = QtGui.QPushButton("<< back", self.speech_box)
         self.bbutton.clicked.connect(self.trigger_script_back)
-        self.speech_layout.addWidget(self.bbutton, 1, 0)
+        self.speech_layout.addWidget(self.bbutton, 2, 0)
 
         self.pbutton = QtGui.QPushButton("-- pause --", self.speech_box)
         self.pbutton.clicked.connect(self.toggle_pause)
-        self.speech_layout.addWidget(self.pbutton, 1, 1)
+        self.speech_layout.addWidget(self.pbutton, 2, 1)
 
         self.fbutton = QtGui.QPushButton("forward >>", self.speech_box)
         self.fbutton.clicked.connect(self.trigger_script_forward)
-        self.speech_layout.addWidget(self.fbutton, 1, 2)
+        self.speech_layout.addWidget(self.fbutton, 2, 2)
 
         self.sbutton = QtGui.QPushButton("[jump to start]", self.speech_box)
         self.sbutton.clicked.connect(self.trigger_script_beginning)
         self.sbutton.setStyleSheet('QPushButton {color: gray;}')
-        self.speech_layout.addWidget(self.sbutton, 1, 3)
+        self.speech_layout.addWidget(self.sbutton, 2, 3)
 
         self.ebutton = QtGui.QPushButton("[jump to end]", self.speech_box)
         self.ebutton.clicked.connect(self.trigger_script_end)
         self.ebutton.setStyleSheet('QPushButton {color: gray;}')
-        self.speech_layout.addWidget(self.ebutton, 1, 4)
+        self.speech_layout.addWidget(self.ebutton, 2, 4)
 
         self.label = QtGui.QLabel(self.speech_box)
         self.label.setText("---")
-        self.speech_layout.addWidget(self.label, 2, 0, 1, 3)
+        self.speech_layout.addWidget(self.label, 3, 0, 1, 3)
 
         json_data=[]
 
@@ -112,17 +116,28 @@ class tega_speech_ui(QtGui.QWidget):
             print ("Could not read your json config file! Is it valid json?")
             pass
 
+        # Add box for setting the speaker's age (used with entrainment module).
+        if self.use_entrainer:
+            speaker_age_label = QtGui.QLabel(self.speech_box)
+            speaker_age_label.setText("Set the current speaker's age: ")
+            self.speech_layout.addWidget(speaker_age_label, 0, 0, 1, 2)
+            self.speaker_age_spin_box = QtGui.QSpinBox(self.speech_box)
+            self.speaker_age_spin_box.setValue(5)
+            self.speaker_age = 5
+            self.speech_layout.addWidget(self.speaker_age_spin_box, 0, 2, 1, 1)
+            self.speaker_age_spin_box.valueChanged[int].connect(self.on_speaker_age_changed)
+
         # TODO add the file paths to folders of scripts into config file!
         # make a dropdown list of available scripts to load
         # user picks one, it loads
         script_box_label = QtGui.QLabel(self.speech_box)
         script_box_label.setText("Pick a script to load: ")
-        self.speech_layout.addWidget(script_box_label, 0, 0)
+        self.speech_layout.addWidget(script_box_label, 1, 0)
         self.script_list_box = QtGui.QComboBox(self)
         script_file_list = glob.glob('../scripts/*.txt')
         self.script_list_box.addItems(script_file_list)
         self.script_list_box.activated['QString'].connect(self.load_script)
-        self.speech_layout.addWidget(self.script_list_box, 0, 1, 1, 2)
+        self.speech_layout.addWidget(self.script_list_box, 1, 1, 1, 2)
 
         # make a dropdown list of available static scripts to load
         # user picks one, it loads
@@ -131,7 +146,7 @@ class tega_speech_ui(QtGui.QWidget):
         self.static_script_list_box.addItems(static_script_file_list)
         self.static_script_list_box.activated['QString'].connect(
                self.load_static_script)
-        self.speech_layout.addWidget(self.static_script_list_box, 0, 3, 1, 2)
+        self.speech_layout.addWidget(self.static_script_list_box, 1, 3, 1, 2)
 
         # read in script if we can
         if ("script" in json_data):
@@ -168,7 +183,7 @@ class tega_speech_ui(QtGui.QWidget):
             # set up the number of option buttons specified in config:
             # where we are putting these buttons in the grid
             col = 0
-            row = 3
+            row = 4
 
             # remove old buttons if there were any
             try:
@@ -226,7 +241,7 @@ class tega_speech_ui(QtGui.QWidget):
         self.static_buttons = []
 
         try:
-            row = 3
+            row = 4
             static_script = open(script_filename)
 
             for line in static_script:
@@ -348,9 +363,16 @@ class tega_speech_ui(QtGui.QWidget):
                 if (sp.isupper()):
                     self.ros_node.send_motion_message(sp)
                     self.label.setText("Sending animation.")
-                # otherwise, it's a speech filename, so call ros send speech
+                # Otherwise, it's a speech filename. If we are using the audio
+                # entrainment module, send the filename there; otherwise, send
+                # to the robot using ROS.
+                elif self.use_entrainer:
+                    # Send the filename to the audio entrainer.
+                    # TODO need to send full filepath! (or stream it?)
+                    self.ros_node.send_entrain_audio_message(sp, self.speaker_age)
+                    self.label.setText("Sending entrain speech command.")
                 else:
-                    # call ros send speech function
+                    # Send directly to the robot.
                     self.ros_node.send_speech_message(sp)
                     self.label.setText("Sending speech command.")
                 time.sleep(0.5)
@@ -386,3 +408,8 @@ class tega_speech_ui(QtGui.QWidget):
                 sb.setStyleSheet('QPushButton {color: red;}')
 
 
+    def on_speaker_age_changed(self, val):
+        """ When the speaker age value is changed in the spin box, update the
+        flag here for use when sending audio to the audio entrainer.
+        """
+        self.speaker_age = val
