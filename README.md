@@ -28,22 +28,22 @@ You probably shouldn't list more than 3-5 of these "always there" speech buttons
 One more thing on scripts. The interface will load a list of scripts located in tega\_teleop\scripts (sibling to \src). There is a dropdown box where you can select which script to load. This way, you can load new scripts or switch scripts without needing to change the config file! Same deal for static scripts, only they are loaded from the tega\_teleop\static\_scripts directory (sibling to \src and \scripts).
 
 ### Opal tablet communication
-Commands to the [opal tablet](https://github.com/personal-robots/SAR-opal-base) are sent over a rosbridge\_server websocket connection. For communication with the tablet to occur, you need to have the rosbridge\_server running, using the following command:
+Commands to the [opal tablet](https://github.com/mitmedialab/SAR-opal-base) are sent over a rosbridge\_server websocket connection. For communication with the tablet to occur, you need to have the rosbridge\_server running, using the following command:
 
 `roslaunch rosbridge\_server rosbridge\_websocket.launch`
 
-You will also need to ensure that the opal tablet's config file lists the IP address or hostname of the machine running roscore. The [opal tablet](https://github.com/personal-robots/SAR-opal-base) documentation explains how to update the config file (it's simple; you change a line in a text file and copy it to the tablet).
+You will also need to ensure that the opal tablet's config file lists the IP address or hostname of the machine running roscore. The [opal tablet](https://github.com/mitmedialab/SAR-opal-base) documentation explains how to update the config file (it's simple; you change a line in a text file and copy it to the tablet).
 
 ## ROS messages
 ### SAR Opal messages
-The program publishes "/[sar\_opal\_msgs](https://github.com/personal-robots/sar_opal_msgs "/sar_opal_msgs")/OpalCommand" to the ROS topic "/opal\_tablet\_command". See [/sar\_opal\_msgs](https://github.com/personal-robots/sar_opal_msgs "/sar_opal_msgs") for more info.
+The program publishes "/[sar\_opal\_msgs](https://github.com/mitmedialab/sar_opal_msgs "/sar_opal_msgs")/OpalCommand" to the ROS topic "/opal\_tablet\_command". See [/sar\_opal\_msgs](https://github.com/mitmedialab/sar_opal_msgs "/sar_opal_msgs") for more info.
 
 ### R1D1 messages
-The program publishes "/[r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs")/TegaAction" to the ROS topic "/tega". 
+The program publishes "/[r1d1\_msgs](https://github.com/mitmedialab/r1d1_msgs "/r1d1_msgs")/TegaAction" to the ROS topic "/tega".
 
-The program subscribes to "/[r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs")/TegaState" on the ROS topic "/tega\_state".
+The program subscribes to "/[r1d1\_msgs](https://github.com/mitmedialab/r1d1_msgs "/r1d1_msgs")/TegaState" on the ROS topic "/tega\_state".
 
-See [/r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs "/r1d1_msgs") for more info.
+See [/r1d1\_msgs](https://github.com/mitmedialab/r1d1_msgs "/r1d1_msgs") for more info.
 
 ### Affdex attention messages
 The program subscribes to Boolean (True/False) messages on the ROS topic "/child\_attention". These messages indicate whether a child is attending to the robot/tablet setup or not.
@@ -54,9 +54,9 @@ This program was developed and tested with:
 
 - Python 2.7.6
 - ROS Indigo
-- [sar\_opal\_msgs](https://github.com/personal-robots/sar_opal_msgs
+- [sar\_opal\_msgs](https://github.com/mitmedialab/sar_opal_msgs
   "/sar_opal_msgs") 2.2.0
-- [r1d1\_msgs](https://github.com/personal-robots/r1d1_msgs) 2.0.0
+- [r1d1\_msgs](https://github.com/mitmedialab/r1d1_msgs) 2.0.0
 - Ubuntu 14.04 LTS (64-bit)
 
 The Cyber4 study was run using tega\_teleop v1.0.1.
@@ -64,7 +64,7 @@ The Cyber4 study was run using tega\_teleop v1.0.1.
 ## Bugs and issues
 
 Please report all bugs and issues on the [tega\_teleop github issues
-page](https://github.com/personal-robots/tega_teleop/issues).
+page](https://github.com/mitmedialab/tega_teleop/issues).
 
 ## TODO
 - Set ROS\_IP from within the python script so the user doesn't have to remember to do it
