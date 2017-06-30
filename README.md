@@ -6,7 +6,6 @@ robot, as well as commands to send to an opal tablet.
 
 ## Configure and Run
 
-
 `python tega_teleop.py [-h] [-e]`
 
 optional arguments:
@@ -26,15 +25,28 @@ ROS\_HOSTNAME=192.168.1.20` in your shell prior to starting this node. If this
 IP is static, you may want to put these commands in your bashrc file (or other
 shell rc file)  so you don't have to remember to run them every time.
 
-The program will also try to read in the interaction script file listed in the
-"tega\_teleop\_config.txt" file. There is an example interaction script file
-located in src/. This script file should list, in order, the filenames of all
-audio files that the robot will be commanded to play back during the
+### Config
+
+The program will use values from the config file to load scripts and send audio:
+
+    - script: the interaction script to use.
+    - options: how many speech buttons are shown for each line of the script.
+    - static\_script: a list of "always there" speech buttons.
+    - audio\_base\_dir: a directory containing audio files (only used if the
+      audio entrainer will be used)
+
+More detail about all these options is provided below.
+
+Essentially, the program will try to read in the interaction script file listed
+in the "tega\_teleop\_config.txt" file. There is an example interaction script
+file located in src/. This script file should list, in order, the filenames of
+all audio files that the robot will be commanded to play back during the
 interaction. The second column should list the words that shown on the speech
 buttons in the GUI (for example, the filename may be "robot\_line\_01.wav" and
 the words to show may be "Hi, I'm Tega"). This allows the program to be used
 for different interactions and different sets of audio files without having to
 change the python code for creating buttons.
+
 
 ### More on scripts
 
@@ -109,6 +121,19 @@ scripts without needing to change the config file! Same deal for static
 scripts, only they are loaded from the tega\_teleop\static\_scripts directory
 (sibling to \src and \scripts).
 
+### Audio entrainer
+
+The [audio entrainer](https://github.com/mitmedialab/rr_audio_entrainer)
+expects full filepaths when you send it audio (i.e., it expects you to give it
+a wav file it can open). So to accommodate this, you can either specify full
+filepaths in your script, or, in the config file, specify a directory on your
+file system where you have put all the wav files that will be used. These then
+get streamed to the robot. But you should only do one or the other!
+
+If you put full filepaths in your script, you should leave the `audio_base_dir`
+option in the config file blank (i.e., put an empty string there or delete it
+entirely from the file),
+
 ### Opal tablet communication
 
 Commands to the [opal tablet](https://github.com/mitmedialab/SAR-opal-base) are
@@ -161,6 +186,7 @@ the ROS topic "/rr/entrain_audio".
 The node also publishes
 "/[rr_msgs](https://github.com/mitmedialab/rr_msgs)/InteractionState" messages
 on the ROS topic "/rr/state".
+
 
 ## Version Notes
 

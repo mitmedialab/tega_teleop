@@ -112,6 +112,9 @@ class tega_speech_ui(QtGui.QWidget):
             else:
                 self.options = 1
                 print ("Could not read number of options! Set to default of 1.")
+            self.audio_base_dir = ""
+            if ("audio_base_dir" in json_data):
+                self.audio_base_dir = json_data["audio_base_dir"]
         except:
             print ("Could not read your json config file! Is it valid json?")
             pass
@@ -376,9 +379,12 @@ class tega_speech_ui(QtGui.QWidget):
                 # entrainment module, send the filename there; otherwise, send
                 # to the robot using ROS.
                 elif self.use_entrainer:
-                    # Send the filename to the audio entrainer.
-                    # TODO need to send full filepath! (or stream it?)
-                    self.ros_node.send_entrain_audio_message(sp, self.speaker_age)
+                    # Send the filename to the audio entrainer. Append the
+                    # filepath to the filename before sending. Note that an
+                    # empty filepath can be provided if the full filepaths are
+                    # given in the script.
+                    self.ros_node.send_entrain_audio_message(
+                            self.audio_base_dir + sp, self.speaker_age)
                     self.label.setText("Sending entrain speech command.")
                 else:
                     # Send directly to the robot.

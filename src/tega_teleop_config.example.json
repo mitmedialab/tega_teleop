@@ -1,5 +1,6 @@
 {
     "script": "example_script.txt",
     "static_script": "example_static_script.txt",
-    "options": 3
+    "options": 3,
+    "audio_base_dir": "~/myaudio/directory/"
 }
