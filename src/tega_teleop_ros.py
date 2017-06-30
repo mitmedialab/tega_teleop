@@ -118,12 +118,13 @@ class tega_teleop_ros():
         self.entrain_pub.publish(msg)
         rospy.loginfo(msg)
 
-    def send_interaction_state_message(self, state):
+    def send_interaction_state_message(self, is_turn):
         """ Publish InteractionState message. """
         print '\nsending interaction state message: %s' % state
         msg = InteractionState()
         msg.header = Header()
         msg.header.stamp = rospy.Time.now()
+        msg.is_participant_turn = is_turn
         self.state.publish(msg)
         rospy.loginfo(msg)
 

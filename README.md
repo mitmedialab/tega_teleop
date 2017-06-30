@@ -72,6 +72,20 @@ name first, the do motion message will be sent first. It is, however, up to the
 robot code to determine if these are cued or whether they play simultaneously,
 so make sure to test it for your use case.
 
+#### PARTICIPANT\_TURN lines
+
+You can include the phrase "PARTICIPANT_TURN" in the list of things to do. So a
+line could include filenames of audio to play, animations, *and* indicators
+that it is now the participant's turn to speak. This will send a message
+containing interaction state information so that other modules can know that it
+is the participant's turn.
+
+A line might look like \[filename1,MOTION,PARTICIPANT_TURN label1
+filename2,MOTION etc.\]
+
+The assumption here is that the script writer knows when the participant is
+asked for input and that the script lines have thus been written appropriately.
+
 #### Static scripts
 
 There is the option of including a set of "static script" buttons to trigger

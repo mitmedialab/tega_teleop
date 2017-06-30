@@ -174,7 +174,7 @@ class tega_speech_ui(QtGui.QWidget):
             # read in script
             script_file = open(script_filename)
             for line in script_file:
-                self.script_list.append(line.rstrip().split("\t"))
+                self.script_list.append(line.strip().split("\t"))
             script_file.close()
 
             # start script line counter
@@ -281,6 +281,8 @@ class tega_speech_ui(QtGui.QWidget):
         self.label.setText("At beginning of script.")
 
 
+
+
     def trigger_script_end(self):
         ''' go to end of script '''
         self.current_line = len(self.script_list) - 1
@@ -354,10 +356,17 @@ class tega_speech_ui(QtGui.QWidget):
             for sp in speech_parts:
                 # wait until tega is not speaking or moving, then send the
                 # next command
-                # TODO text this with new robot rig
+                # TODO test this with new robot rig
                 while (self.flags.tega_is_playing_sound
                        or self.flags.tega_is_doing_motion):
-                    time.sleep(0.5)
+                    time.sleep(0.1)
+
+                # If this part says "CHILD_TURN", set the interaction state and
+                # if we are using the audio entrainment module, send a message
+                # indicating that it is the child's turn to speak.
+                if sp is "PARTICIPANT_TURN" and self.use_entrainer:
+                    self.ros_node.send_interaction_state_message(True)
+                    self.label.setText("Sending child turn message.")
 
                 # if this part is an animation (all caps), send a motion command
                 if (sp.isupper()):
