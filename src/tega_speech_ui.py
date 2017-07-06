@@ -115,6 +115,9 @@ class tega_speech_ui(QtGui.QWidget):
             self.audio_base_dir = ""
             if ("audio_base_dir" in json_data):
                 self.audio_base_dir = json_data["audio_base_dir"]
+            self.viseme_base_dir = ""
+            if ("viseme_base_dir" in json_data):
+                self.viseme_base_dir = json_data["viseme_base_dir"]
         except:
             print ("Could not read your json config file! Is it valid json?")
             pass
@@ -367,7 +370,7 @@ class tega_speech_ui(QtGui.QWidget):
                 # If this part says "CHILD_TURN", set the interaction state and
                 # if we are using the audio entrainment module, send a message
                 # indicating that it is the child's turn to speak.
-                if sp is "PARTICIPANT_TURN" and self.use_entrainer:
+                if sp is "PARTICIPANT_TURN":
                     self.ros_node.send_interaction_state_message(True)
                     self.label.setText("Sending child turn message.")
 
@@ -382,9 +385,17 @@ class tega_speech_ui(QtGui.QWidget):
                     # Send the filename to the audio entrainer. Append the
                     # filepath to the filename before sending. Note that an
                     # empty filepath can be provided if the full filepaths are
-                    # given in the script.
+                    # given in the script. We assume that corresponding viseme
+                    # files have the same name but with a .txt extension, and
+                    # are located at the viseme filepath. If full filepaths are
+                    # provided in the script, then an empty filepath should be
+                    # provided for the viseme filepath as well, and the viseme
+                    # text files should be located in the same directory as the
+                    # audio.
                     self.ros_node.send_entrain_audio_message(
-                            self.audio_base_dir + sp, self.speaker_age)
+                            self.audio_base_dir + sp,
+                            self.viseme_base_dir + sp.replace(".wav",".txt"),
+                            self.speaker_age)
                     self.label.setText("Sending entrain speech command.")
                 else:
                     # Send directly to the robot.
