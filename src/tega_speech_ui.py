@@ -375,7 +375,7 @@ class tega_speech_ui(QtGui.QWidget):
                     self.label.setText("Sending child turn message.")
 
                 # if this part is an animation (all caps), send a motion command
-                if (sp.isupper()):
+                elif (sp.isupper()):
                     self.ros_node.send_motion_message(sp)
                     self.label.setText("Sending animation.")
                 # Otherwise, it's a speech filename. If we are using the audio
