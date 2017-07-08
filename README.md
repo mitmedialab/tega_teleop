@@ -9,9 +9,10 @@ robot, as well as commands to send to an opal tablet.
 `python tega_teleop.py [-h] [-e]`
 
 optional arguments:
-    - `-h`, `--help`: show this help message and exit
-    - `-e`, `--use-entrainer`: Send audio to the audio entrainer on the way to
-      the robot.
+
+- `-h`, `--help`: show this help message and exit
+- `-e`, `--use-entrainer`: Send audio to the audio entrainer on the way to the
+  robot.
 
 On startup, this python node will try to connect to roscore. If roscore is not
 running, the program will exit.
@@ -29,11 +30,11 @@ shell rc file)  so you don't have to remember to run them every time.
 
 The program will use values from the config file to load scripts and send audio:
 
-    - script: the interaction script to use.
-    - options: how many speech buttons are shown for each line of the script.
-    - static_script: a list of "always there" speech buttons.
-    - audio_base_dir: a directory containing audio files (only used if the
-      audio entrainer will be used)
+- script: the interaction script to use.
+- options: how many speech buttons are shown for each line of the script.
+- static_script: a list of "always there" speech buttons.
+- audio_base_dir: a directory containing audio files (only used if the audio
+  entrainer will be used)
 
 More detail about all these options is provided below.
 
