@@ -17,11 +17,11 @@ On startup, this python node will try to connect to roscore. If roscore is not
 running, the program will exit.
 
 If this node is running on a network where DNS does not resolve local
-hostnames, you will need to export the environment variable $ROS\_IP and
-$ROS\_HOSTNAME to be the public IP address of this node. For example, if the
+hostnames, you will need to export the environment variables `$ROS_IP` and
+`$ROS_HOSTNAME` to be the public IP address of this node. For example, if the
 machine this node is running on has the IP address "192.168.1.20", you would
-run the commands `export ROS\_IP=192.168.1.20` and `export
-ROS\_HOSTNAME=192.168.1.20` in your shell prior to starting this node. If this
+run the commands `export ROS_IP=192.168.1.20` and `export
+ROS_HOSTNAME=192.168.1.20` in your shell prior to starting this node. If this
 IP is static, you may want to put these commands in your bashrc file (or other
 shell rc file)  so you don't have to remember to run them every time.
 
@@ -31,8 +31,8 @@ The program will use values from the config file to load scripts and send audio:
 
     - script: the interaction script to use.
     - options: how many speech buttons are shown for each line of the script.
-    - static\_script: a list of "always there" speech buttons.
-    - audio\_base\_dir: a directory containing audio files (only used if the
+    - static_script: a list of "always there" speech buttons.
+    - audio_base_dir: a directory containing audio files (only used if the
       audio entrainer will be used)
 
 More detail about all these options is provided below.
