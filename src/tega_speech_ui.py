@@ -362,7 +362,6 @@ class tega_speech_ui(QtGui.QWidget):
             for sp in speech_parts:
                 # wait until tega is not speaking or moving, then send the
                 # next command
-                # TODO test this with new robot rig
                 while (self.flags.tega_is_playing_sound
                        or self.flags.tega_is_doing_motion):
                     time.sleep(0.1)
@@ -397,11 +396,12 @@ class tega_speech_ui(QtGui.QWidget):
                             self.viseme_base_dir + sp.replace(".wav",".txt"),
                             self.speaker_age)
                     self.label.setText("Sending entrain speech command.")
+                    self.wait_for_speaking()
                 else:
                     # Send directly to the robot.
                     self.ros_node.send_speech_message(sp)
                     self.label.setText("Sending speech command.")
-                time.sleep(0.5)
+                    self.wait_for_speaking()
 
         speech = "-"
         # if first option and not paused, autoadvance, call trigger script forward
@@ -439,3 +439,25 @@ class tega_speech_ui(QtGui.QWidget):
         flag here for use when sending audio to the audio entrainer.
         """
         self.speaker_age = val
+
+    def wait_for_speaking(self, timeout=3):
+        """ Wait until we hear the robot start playing sound before going on to
+        process the next command and wait for the robot to be done playing
+        sound. We have to wait because when streaming audio through the audio
+        entrainer, it sometimes takes a couple seconds for the audio to be
+        processed and sent to the robot. So we want to make sure we wait until
+        the robot has gotten the command to play audio before we move on to the
+        next item in the script. Otherwise, we might see that the robot isn't
+        playing any sound and send the next item in the script too soon,
+        clobbering the audio that's about to be played as it is sent from the
+        entrainer to the robot.
+        """
+        counter = 0
+        increment = 0.1
+        while (not self.flags.tega_is_playing_sound and counter < timeout):
+            counter += increment
+            time.sleep(increment)
+
+        if counter >= timeout:
+            print "Warning: timed out waiting for robot to start playing " \
+                     "sound! timeout: " + str(timeout) + ". Moving on..."
