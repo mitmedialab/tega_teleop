@@ -34,6 +34,8 @@ The program will use values from the config file to load scripts and send audio:
     - static\_script: a list of "always there" speech buttons.
     - audio\_base\_dir: a directory containing audio files (only used if the
       audio entrainer will be used)
+    - viseme\_base\_dir: a directory contianing viseme files (only used if the
+      audio entrainer will be used)
 
 More detail about all these options is provided below.
 
@@ -132,7 +134,10 @@ get streamed to the robot. But you should only do one or the other!
 
 If you put full filepaths in your script, you should leave the `audio_base_dir`
 option in the config file blank (i.e., put an empty string there or delete it
-entirely from the file),
+entirely from the file). In this case, you should also leave `viseme_base_dir`
+blank and put your viseme text files in the same directory as your audio files,
+because currently, we assume that viseme files have the same name as their audio
+files, and just replace the file extension.
 
 ### Opal tablet communication
 

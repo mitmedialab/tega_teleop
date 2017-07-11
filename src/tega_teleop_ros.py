@@ -107,13 +107,14 @@ class tega_teleop_ros():
         self.tega_pub.publish(msg)
         rospy.loginfo(msg)
 
-    def send_entrain_audio_message(self, speech, age):
+    def send_entrain_audio_message(self, speech, visemes, age):
         """ Publish EntrainAudio message. """
         print '\nsending entrain speech message: %s' % speech
         msg = EntrainAudio()
         msg.header = Header()
         msg.header.stamp = rospy.Time.now()
         msg.audio = speech
+        msg.viseme_file = visemes
         msg.age = age
         self.entrain_pub.publish(msg)
         rospy.loginfo(msg)
