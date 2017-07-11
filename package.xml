@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <package>
   <name>tega_teleop</name>
-  <version>1.0.1</version>
+  <version>1.2.0</version>
   <description>An interface to remotely teleoperate the Tega robot</description>
 
   <maintainer email="jakory@media.mit.edu">jakory</maintainer>
   <license>MIT</license>
-  <url type="website">https://github.com/personal-robots/tega_teleop</url>
+  <url type="website">https://github.com/mitmedialab/tega_teleop</url>
   <author email="jakory@media.mit.edu">jakory</author>
 
   <buildtool_depend>catkin</buildtool_depend>
