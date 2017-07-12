@@ -369,7 +369,7 @@ class tega_speech_ui(QtGui.QWidget):
                 # If this part says "CHILD_TURN", set the interaction state and
                 # if we are using the audio entrainment module, send a message
                 # indicating that it is the child's turn to speak.
-                if sp is "PARTICIPANT_TURN":
+                if sp == "PARTICIPANT_TURN":
                     self.ros_node.send_interaction_state_message(True)
                     self.label.setText("Sending child turn message.")
 
@@ -377,6 +377,8 @@ class tega_speech_ui(QtGui.QWidget):
                 elif (sp.isupper()):
                     self.ros_node.send_motion_message(sp)
                     self.label.setText("Sending animation.")
+                    self.wait_for_motion()
+
                 # Otherwise, it's a speech filename. If we are using the audio
                 # entrainment module, send the filename there; otherwise, send
                 # to the robot using ROS.
@@ -461,3 +463,21 @@ class tega_speech_ui(QtGui.QWidget):
         if counter >= timeout:
             print "Warning: timed out waiting for robot to start playing " \
                      "sound! timeout: " + str(timeout) + ". Moving on..."
+
+    def wait_for_motion(self, timeout=3):
+        """ Wait until the robot has started playing an animation before going
+        on to wait for the robot to be done playing it (similar to waiting for
+        sound, above).
+        """
+        # TODO Could possibly combine this with wait_for_speaking and pass in
+        # what to wait for.
+        counter = 0
+        increment = 0.1
+        while (not self.flags.tega_is_doing_motion and counter < timeout):
+            counter += increment
+            time.sleep(increment)
+
+        if counter >= timeout:
+            print "Warning: timed out waiting for robot to start doing " \
+                     "motion! timeout: " + str(timeout) + ". Moving on..."
+
