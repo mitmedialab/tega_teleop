@@ -62,6 +62,7 @@ class tega_teleop_ros():
                 queue_size = 10)
         self.tega_pub = rospy.Publisher('tega', TegaAction, queue_size = 10)
 
+        self.entrain_pub = None
         if use_entrainer:
             self.entrain_pub = rospy.Publisher('rr/entrain_audio', EntrainAudio,
                     queue_size = 10)
@@ -107,17 +108,19 @@ class tega_teleop_ros():
         self.tega_pub.publish(msg)
         rospy.loginfo(msg)
 
-    def send_entrain_audio_message(self, speech, visemes, age):
+    def send_entrain_audio_message(self, speech, visemes, age, entrain):
         """ Publish EntrainAudio message. """
-        print '\nsending entrain speech message: %s' % speech
-        msg = EntrainAudio()
-        msg.header = Header()
-        msg.header.stamp = rospy.Time.now()
-        msg.audio = speech
-        msg.viseme_file = visemes
-        msg.age = age
-        self.entrain_pub.publish(msg)
-        rospy.loginfo(msg)
+        if self.entrain_pub is not None:
+            print '\nsending entrain speech message: %s' % speech
+            msg = EntrainAudio()
+            msg.header = Header()
+            msg.header.stamp = rospy.Time.now()
+            msg.audio = speech
+            msg.viseme_file = visemes
+            msg.age = age
+            msg.entrain = entrain
+            self.entrain_pub.publish(msg)
+            rospy.loginfo(msg)
 
     def send_interaction_state_message(self, is_turn):
         """ Publish InteractionState message. """

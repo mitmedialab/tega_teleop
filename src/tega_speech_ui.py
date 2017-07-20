@@ -123,6 +123,8 @@ class tega_speech_ui(QtGui.QWidget):
             pass
 
         # Add box for setting the speaker's age (used with entrainment module).
+        # Also add a box to tell the entrain whether or not to entrain or to
+        # just stream audio.
         if self.use_entrainer:
             speaker_age_label = QtGui.QLabel(self.speech_box)
             speaker_age_label.setText("Set the current speaker's age: ")
@@ -132,6 +134,10 @@ class tega_speech_ui(QtGui.QWidget):
             self.speaker_age = 5
             self.speech_layout.addWidget(self.speaker_age_spin_box, 0, 2, 1, 1)
             self.speaker_age_spin_box.valueChanged[int].connect(self.on_speaker_age_changed)
+
+            self.entrain_checkbox = QtGui.QCheckBox(self.speech_box)
+            self.entrain_checkbox.setText("Entrain?")
+            self.speech_layout.addWidget(self.entrain_checkbox, 0, 4, 1, 2)
 
         # TODO add the file paths to folders of scripts into config file!
         # make a dropdown list of available scripts to load
@@ -287,8 +293,6 @@ class tega_speech_ui(QtGui.QWidget):
         self.label.setText("At beginning of script.")
 
 
-
-
     def trigger_script_end(self):
         ''' go to end of script '''
         self.current_line = len(self.script_list) - 1
@@ -396,7 +400,8 @@ class tega_speech_ui(QtGui.QWidget):
                     self.ros_node.send_entrain_audio_message(
                             self.audio_base_dir + sp,
                             self.viseme_base_dir + sp.replace(".wav",".txt"),
-                            self.speaker_age)
+                            self.speaker_age,
+                            self.entrain_checkbox.isChecked())
                     self.label.setText("Sending entrain speech command.")
                     self.wait_for_speaking()
                 else:
@@ -434,7 +439,6 @@ class tega_speech_ui(QtGui.QWidget):
         else:
             for sb in self.static_buttons:
                 sb.setStyleSheet('QPushButton {color: red;}')
-
 
     def on_speaker_age_changed(self, val):
         """ When the speaker age value is changed in the spin box, update the
