@@ -63,6 +63,7 @@ class tega_teleop_ros():
         self.tega_pub = rospy.Publisher('tega', TegaAction, queue_size = 10)
 
         self.entrain_pub = None
+        self.state_pub = None
         if use_entrainer:
             self.entrain_pub = rospy.Publisher('rr/entrain_audio', EntrainAudio,
                     queue_size = 10)
@@ -72,41 +73,45 @@ class tega_teleop_ros():
 
     def send_opal_message(self, command):
         """ Publish opal command message """
-        print 'sending opal command: %s' % command
-        msg = OpalCommand()
-        # add header
-        msg.header = Header()
-        msg.header.stamp = rospy.Time.now()
-        msg.command = command
-        self.tablet_pub.publish(msg)
-        rospy.loginfo(msg)
+        if self.tablet_pub is not None:
+            print 'sending opal command: %s' % command
+            msg = OpalCommand()
+            # add header
+            msg.header = Header()
+            msg.header.stamp = rospy.Time.now()
+            msg.command = command
+            self.tablet_pub.publish(msg)
+            rospy.loginfo(msg)
 
     def send_motion_message(self, motion):
         """ Publish TegaAction do motion message """
-        print 'sending motion message: %s' % motion
-        msg = TegaAction()
-        msg.do_motion = True
-        msg.motion = motion
-        self.tega_pub.publish(msg)
-        rospy.loginfo(msg)
+        if self.tega_pub is not None:
+            print 'sending motion message: %s' % motion
+            msg = TegaAction()
+            msg.do_motion = True
+            msg.motion = motion
+            self.tega_pub.publish(msg)
+            rospy.loginfo(msg)
 
     def send_lookat_message(self, lookat):
         """ Publish TegaAction lookat message """
-        print 'sending lookat message: %s' % lookat
-        msg = TegaAction()
-        msg.do_look_at = True
-        msg.look_at = lookat
-        self.tega_pub.publish(msg)
-        rospy.loginfo(msg)
+        if self.tega_pub is not None:
+            print 'sending lookat message: %s' % lookat
+            msg = TegaAction()
+            msg.do_look_at = True
+            msg.look_at = lookat
+            self.tega_pub.publish(msg)
+            rospy.loginfo(msg)
 
     def send_speech_message(self, speech):
         """ Publish TegaAction playback audio message """
-        print '\nsending speech message: %s' % speech
-        msg = TegaAction()
-        msg.do_sound_playback = True
-        msg.wav_filename = speech
-        self.tega_pub.publish(msg)
-        rospy.loginfo(msg)
+        if self.tega_pub is not None:
+            print '\nsending speech message: %s' % speech
+            msg = TegaAction()
+            msg.do_sound_playback = True
+            msg.wav_filename = speech
+            self.tega_pub.publish(msg)
+            rospy.loginfo(msg)
 
     def send_entrain_audio_message(self, speech, visemes, age, entrain):
         """ Publish EntrainAudio message. """
@@ -124,13 +129,14 @@ class tega_teleop_ros():
 
     def send_interaction_state_message(self, is_turn):
         """ Publish InteractionState message. """
-        print '\nsending interaction state message: %s' % is_turn
-        msg = InteractionState()
-        msg.header = Header()
-        msg.header.stamp = rospy.Time.now()
-        msg.is_participant_turn = is_turn
-        self.state_pub.publish(msg)
-        rospy.loginfo(msg)
+        if self.state_pub is not None:
+            print '\nsending interaction state message: %s' % is_turn
+            msg = InteractionState()
+            msg.header = Header()
+            msg.header.stamp = rospy.Time.now()
+            msg.is_participant_turn = is_turn
+            self.state_pub.publish(msg)
+            rospy.loginfo(msg)
 
     def on_child_attn_msg(self, data):
         # when we get child attention messages, set a label to say whether the
