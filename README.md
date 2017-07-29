@@ -202,11 +202,14 @@ This program was developed and tested with:
 - ROS Indigo
 - [sar\_opal\_msgs](https://github.com/mitmedialab/sar_opal_msgs
   "/sar_opal_msgs") 4.0.0
-- [r1d1\_msgs](https://github.com/mitmedialab/r1d1_msgs) 4.0.0
-- [rr\_msgs](https://github.com/mitmedialab/rr_msgs) 1.0.0
-- Ubuntu 14.04 LTS (32-bit)
+- [r1d1\_msgs](https://github.com/mitmedialab/r1d1_msgs) 8.0.0
+- [rr\_msgs](https://github.com/mitmedialab/rr_msgs) 3.0.0
+- Ubuntu 14.04 LTS (32-bit, 64-bit)
 
 The Cyber4 study was run using tega\_teleop v1.0.1.
+
+The RR1 study was run using tega\_teleop v2.2.0, rr\_msgs 3.0.0, and r1d1\_msgs
+6.0.0.
 
 ## Bugs and issues
 
