@@ -88,7 +88,6 @@ class tega_teleop_ros():
         if self.tega_pub is not None:
             print 'sending motion message: %s' % motion
             msg = TegaAction()
-            msg.do_motion = True
             msg.motion = motion
             self.tega_pub.publish(msg)
             rospy.loginfo(msg)
@@ -108,10 +107,19 @@ class tega_teleop_ros():
         if self.tega_pub is not None:
             print '\nsending speech message: %s' % speech
             msg = TegaAction()
-            msg.do_sound_playback = True
             msg.wav_filename = speech
             self.tega_pub.publish(msg)
             rospy.loginfo(msg)
+
+    def send_fidget_message(self, fidget):
+        """ Publish TegaAction message setting the fidget set in use. """
+        if self.tega_pub is not None:
+            print '\nsending fidget message: %s' % fidget
+            msg = TegaAction()
+            msg.fidgets = fidget
+            self.tega_pub.publish(msg)
+            rospy.loginfo(msg)
+
 
     def send_entrain_audio_message(self, speech, visemes, age, entrain):
         """ Publish EntrainAudio message. """
