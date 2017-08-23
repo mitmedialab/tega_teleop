@@ -137,7 +137,11 @@ class tega_speech_ui(QtGui.QWidget):
 
             self.entrain_checkbox = QtGui.QCheckBox(self.speech_box)
             self.entrain_checkbox.setText("Entrain?")
-            self.speech_layout.addWidget(self.entrain_checkbox, 0, 4, 1, 2)
+            self.speech_layout.addWidget(self.entrain_checkbox, 0, 3, 1, 1)
+
+            self.turn_button = QtGui.QPushButton("PARTICIPANT TURN", self.speech_box)
+            self.turn_button.clicked.connect(self.send_participant_turn)
+            self.speech_layout.addWidget(self.turn_button, 0, 4, 1, 1)
 
         # TODO add the file paths to folders of scripts into config file!
         # make a dropdown list of available scripts to load
@@ -484,4 +488,10 @@ class tega_speech_ui(QtGui.QWidget):
         if counter >= timeout:
             print "Warning: timed out waiting for robot to start doing " \
                      "motion! timeout: " + str(timeout) + ". Moving on..."
+
+
+    def send_participant_turn(self):
+        """ On a button press, send a participant turn message. """
+        self.ros_node.send_interaction_state_message(True)
+        self.label.setText("Sending child turn message.")
 
