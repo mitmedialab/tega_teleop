@@ -38,6 +38,7 @@ from tega_lookat_ui import tega_lookat_ui
 from tega_speech_ui import tega_speech_ui
 from opal_tablet_ui import opal_tablet_ui
 from tega_fidget_ui import tega_fidget_ui
+from tega_volume_ui import tega_volume_ui
 from tega_teleop_flags import tega_teleop_flags
 
 class tega_teleop(QtGui.QMainWindow):
@@ -54,7 +55,7 @@ class tega_teleop(QtGui.QMainWindow):
         """ Initialize teleop interface """
         # setup GUI teleop interface
         super(tega_teleop, self).__init__()
-        self.setGeometry(200,50,800,750)
+        self.setGeometry(200,50,950,700)
         self.setWindowTitle("Tega Teleop")
 
         # create layout
@@ -83,20 +84,24 @@ class tega_teleop(QtGui.QMainWindow):
         anim_ui = tega_animation_ui(self.ros_teleop)
         self.central_layout.addWidget(anim_ui, 0, 0, 2, 7)
 
-        # add lookat buttons
-        lookat_ui = tega_lookat_ui(self.ros_teleop)
-        self.central_layout.addWidget(lookat_ui, 2, 3, 2, 3)
-
-        # Add fidget control buttons.
-        fidget_ui = tega_fidget_ui(self.ros_teleop)
-        self.central_layout.addWidget(fidget_ui, 3, 3, 1, 3)
-
         # add tablet controls
         opal_ui = opal_tablet_ui(self.ros_teleop)
         self.central_layout.addWidget(opal_ui, 2, 0, 2, 3)
 
-        # add robot script playback buttons (mostly speech, but the scripts
-        # can also list animations to play before or after an audio file)
+        # add lookat buttons
+        lookat_ui = tega_lookat_ui(self.ros_teleop)
+        self.central_layout.addWidget(lookat_ui, 2, 5, 2, 3)
+
+        # Add fidget control buttons.
+        fidget_ui = tega_fidget_ui(self.ros_teleop)
+        self.central_layout.addWidget(fidget_ui, 2, 3, 1, 2)
+
+        # Add volume controls.
+        volume_ui = tega_volume_ui(self.ros_teleop)
+        self.central_layout.addWidget(volume_ui, 3, 3, 1, 2)
+
+        # Add robot script playback buttons (mostly speech, but the scripts
+        # can also list animations to play before or after an audio file).
         speech_ui = tega_speech_ui(self.ros_teleop, self.flags, use_entrainer)
         self.central_layout.addWidget(speech_ui, 5, 0, 3, 7)
 

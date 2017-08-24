@@ -120,6 +120,15 @@ class tega_teleop_ros():
             self.tega_pub.publish(msg)
             rospy.loginfo(msg)
 
+    def send_volume_message(self, volume):
+        """ Publish TegaAction message setting the percent volume to use. """
+        if self.tega_pub is not None:
+            print '\nsending volume message: %s' % volume
+            msg = TegaAction()
+            msg.set_volume = True
+            msg.percent_volume = volume
+            self.tega_pub.publish(msg)
+            rospy.loginfo(msg)
 
     def send_entrain_audio_message(self, speech, visemes, age, entrain):
         """ Publish EntrainAudio message. """

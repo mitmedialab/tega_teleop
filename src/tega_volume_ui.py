@@ -1,5 +1,5 @@
 # Jacqueline Kory Westlund
-# July 2017
+# August 2017
 #
 # The MIT License (MIT)
 #
@@ -25,41 +25,33 @@
 
 from PySide import QtGui # Basic GUI stuff.
 from tega_teleop_ros import tega_teleop_ros
-# Get fidget constants from TegaAction ROS msgs.
-from r1d1_msgs.msg import TegaAction
 
-class tega_fidget_ui(QtGui.QWidget):
-
-    fidget_sets = {
-            "no fidgets": TegaAction.FIDGETS_EMPTY,
-            "speech fidgets": TegaAction.FIDGETS_SPEECH,
-            "physical fidgets": TegaAction.FIDGETS_PHYSICAL
-            }
+class tega_volume_ui(QtGui.QWidget):
 
     def __init__(self, ros_node):
-        """ Make buttons to tell robot to fidget. """
-        super(tega_fidget_ui, self).__init__()
+        """ Make buttons to tell robot to play audio louder or quieter. """
+        super(tega_volume_ui, self).__init__()
         # Get reference to ros node so we can do callbacks to publish messages.
         self.ros_node = ros_node
 
         # Put buttons in a box.
-        self.fidget_box = QtGui.QGroupBox(self)
-        self.fidget_layout = QtGui.QGridLayout(self.fidget_box)
-        self.fidget_box.setTitle("Fidgets")
+        self.volume_box = QtGui.QGroupBox(self)
+        self.volume_layout = QtGui.QGridLayout(self.volume_box)
+        self.volume_box.setTitle("Volume")
 
-        # Create fidget buttons and add to layout.
-        self.label = QtGui.QLabel(self.fidget_box)
-        self.label.setText("Choose fidget set: ")
-        self.fidget_layout.addWidget(self.label, 0, 0)
+        # Create volume buttons and add to layout.
+        self.label = QtGui.QLabel(self.volume_box)
+        self.label.setText("Set volume (0=none, 1=max): ")
+        self.volume_layout.addWidget(self.label, 0, 0)
+        self.volume_spin_box = QtGui.QDoubleSpinBox(self)
+        self.volume_spin_box.setRange(0.0, 1.0)
+        self.volume_spin_box.setValue(0.5)
+        self.volume_spin_box.setSingleStep(0.05)
+        self.volume_spin_box.valueChanged[float].connect(self.on_volume_changed)
+        self.volume_layout.addWidget(self.volume_spin_box, 1, 0, 1, 1)
 
-        self.fidget_set_box = QtGui.QComboBox(self)
-        fidget_set_list = self.fidget_sets.keys()
-        self.fidget_set_box.addItems(fidget_set_list)
-        self.fidget_set_box.activated['QString'].connect(self.on_fidget_set_selected)
-        self.fidget_layout.addWidget(self.fidget_set_box, 1, 0, 1, 2)
-
-    def on_fidget_set_selected(self, fidget_set):
-        """ When the fidget set is changed in the combo box, send a message
-        to the robot to tell it what set should now be in use.
+    def on_volume_changed(self, volume):
+        """ When the volume is changed, send a message to the robot to tell it
+        what the volume should be.
         """
-        self.ros_node.send_fidget_message(self.fidget_sets[fidget_set])
+        self.ros_node.send_volume_message(volume)
