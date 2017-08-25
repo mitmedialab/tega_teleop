@@ -88,6 +88,9 @@ class tega_teleop_ros():
         if self.tega_pub is not None:
             print 'sending motion message: %s' % motion
             msg = TegaAction()
+            # add header
+            msg.header = Header()
+            msg.header.stamp = rospy.Time.now()
             msg.motion = motion
             self.tega_pub.publish(msg)
             rospy.loginfo(msg)
@@ -97,6 +100,9 @@ class tega_teleop_ros():
         if self.tega_pub is not None:
             print 'sending lookat message: %s' % lookat
             msg = TegaAction()
+            # add header
+            msg.header = Header()
+            msg.header.stamp = rospy.Time.now()
             msg.do_look_at = True
             msg.look_at = lookat
             self.tega_pub.publish(msg)
@@ -107,6 +113,9 @@ class tega_teleop_ros():
         if self.tega_pub is not None:
             print '\nsending speech message: %s' % speech
             msg = TegaAction()
+            # add header
+            msg.header = Header()
+            msg.header.stamp = rospy.Time.now()
             msg.wav_filename = speech
             self.tega_pub.publish(msg)
             rospy.loginfo(msg)
@@ -116,6 +125,9 @@ class tega_teleop_ros():
         if self.tega_pub is not None:
             print '\nsending fidget message: %s' % fidget
             msg = TegaAction()
+            # add header
+            msg.header = Header()
+            msg.header.stamp = rospy.Time.now()
             msg.fidgets = fidget
             self.tega_pub.publish(msg)
             rospy.loginfo(msg)
@@ -125,6 +137,9 @@ class tega_teleop_ros():
         if self.tega_pub is not None:
             print '\nsending volume message: %s' % volume
             msg = TegaAction()
+            # add header
+            msg.header = Header()
+            msg.header.stamp = rospy.Time.now()
             msg.set_volume = True
             msg.percent_volume = volume
             self.tega_pub.publish(msg)
