@@ -451,7 +451,7 @@ class tega_speech_ui(QtGui.QWidget):
         """
         self.speaker_age = val
 
-    def wait_for_speaking(self, timeout=8):
+    def wait_for_speaking(self, timeout=15):
         """ Wait until we hear the robot start playing sound before going on to
         process the next command and wait for the robot to be done playing
         sound. We have to wait because when streaming audio through the audio
