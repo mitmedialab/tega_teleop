@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>tega_teleop</name>
-  <version>2.5.0</version>
+  <version>2.5.2</version>
   <description>An interface to remotely teleoperate the Tega robot</description>
 
   <maintainer email="jakory@media.mit.edu">jakory</maintainer>

@@ -32,10 +32,10 @@ The program will use values from the config file to load scripts and send audio:
 
     - script: the interaction script to use.
     - options: how many speech buttons are shown for each line of the script.
-    - static\_script: a list of "always there" speech buttons.
-    - audio\_base\_dir: a directory containing audio files (only used if the
+    - static_script: a list of "always there" speech buttons.
+    - audio_base_dir: a directory containing audio files (only used if the
       audio entrainer will be used)
-    - viseme\_base\_dir: a directory contianing viseme files (only used if the
+    - viseme_base_dir: a directory contianing viseme files (only used if the
       audio entrainer will be used)
 
 More detail about all these options is provided below.
