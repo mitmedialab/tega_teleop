@@ -55,7 +55,7 @@ class tega_teleop(QtGui.QMainWindow):
         """ Initialize teleop interface """
         # setup GUI teleop interface
         super(tega_teleop, self).__init__()
-        self.setGeometry(200,50,950,700)
+        self.setGeometry(50, 50, 950, 1500)
         self.setWindowTitle("Tega Teleop")
 
         # create layout
@@ -82,28 +82,28 @@ class tega_teleop(QtGui.QMainWindow):
 
         # add animation buttons
         anim_ui = tega_animation_ui(self.ros_teleop)
-        self.central_layout.addWidget(anim_ui, 0, 0, 2, 7)
+        self.central_layout.addWidget(anim_ui, 0, 0, 4, 10)
 
         # add tablet controls
         opal_ui = opal_tablet_ui(self.ros_teleop)
-        self.central_layout.addWidget(opal_ui, 2, 0, 2, 3)
+        self.central_layout.addWidget(opal_ui, 4, 0, 2, 3)
 
         # add lookat buttons
         lookat_ui = tega_lookat_ui(self.ros_teleop)
-        self.central_layout.addWidget(lookat_ui, 2, 5, 2, 3)
+        self.central_layout.addWidget(lookat_ui, 4, 5, 2, 3)
 
         # Add fidget control buttons.
         fidget_ui = tega_fidget_ui(self.ros_teleop)
-        self.central_layout.addWidget(fidget_ui, 2, 3, 1, 2)
+        self.central_layout.addWidget(fidget_ui, 4, 3, 1, 2)
 
         # Add volume controls.
         volume_ui = tega_volume_ui(self.ros_teleop)
-        self.central_layout.addWidget(volume_ui, 3, 3, 1, 2)
+        self.central_layout.addWidget(volume_ui, 5, 3, 1, 2)
 
         # Add robot script playback buttons (mostly speech, but the scripts
         # can also list animations to play before or after an audio file).
         speech_ui = tega_speech_ui(self.ros_teleop, self.flags, use_entrainer)
-        self.central_layout.addWidget(speech_ui, 5, 0, 3, 7)
+        self.central_layout.addWidget(speech_ui, 6, 0, 3, 7)
 
 if __name__ == '__main__':
 
