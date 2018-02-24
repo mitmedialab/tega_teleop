@@ -1,0 +1,6 @@
+rr1/rr1_story_03.wav	Yay
+rr1/ThatsSoSilly.wav	That's silly
+rr1/hmThatsGoodQuestion.wav	Hm that's a good question 
+rr1/yeahIDontKnow.wav	Yeah I don't know. 
+rr1/uhuhh.wav	Uhuhh. 
+rr1/Why.wav	Why? 

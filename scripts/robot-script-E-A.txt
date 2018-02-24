@@ -1,0 +1,45 @@
+PERKUP,cyber4/emotional_intro_01.wav	Hi, I'm Tega!
+cyber4/emotional_intro_02.wav,LAUGH,IDLESTILL	My favorite color
+cyber4/emotional_intro_03.wav	What's your favorite?
+cyber4/emotional_intro_05.wav	I like blue	cyber4/emotional_intro_04.wav,AGREEMENT	That's pretty!
+cyber4/emotional_intro_06.wav,SHIFT_WEIGHT2,IDLESTILL	What do you like?
+cyber4/emotional_intro_08.wav,SHIMMY,IDLESTILL	Do you dance?	cyber4/emotional_intro_07.wav	That sounds fun
+cyber4/emotional_intro_10.wav,HAPPY_WIGGLE,IDLESTILL	Hear story?	cyber4/emotional_intro_09.wav	Oh cool
+POSE_FORWARD,cyber4/emotional_01.wav	frog1	cyber4/emotional_intro_11.wav	Great!	cyber4/emotional_intro_12.wav	It'll be fun
+POSE_FORWARD,cyber4/emotional_02.wav,YES,IDLESTILL	frog2
+cyber4/emotional_dialogic_02.wav,IDLESTILL	What's frog doing?
+POSE_FORWARD,cyber4/emotional_03.wav,SAD,IDLESTILL	frog3	cyber4/emotional_dialogic_goodThought.wav	Good thought	cyber4/emotional_dialogic_mmm.wav	Mmm
+POSE_FORWARD,cyber4/emotional_04.wav	frog4
+cyber4/emotional_dialogic_04.wav,IDLESTILL	What does boy feel?
+POSE_FORWARD,cyber4/emotional_05.wav,THINKING,IDLESTILL	frog5	cyber4/emotional_dialogic_hmm.wav	Hmm	cyber4/emotional_dialogic_mmhm.wav	Mmhm
+POSE_FORWARD,cyber4/emotional_06.wav	frog6
+cyber4/emotional_dialogic_06.wav,IDLESTILL	What's boy doing?
+POSE_FORWARD,cyber4/emotional_07.wav	frog7	cyber4/emotional_dialogic_mmhm.wav	Mmhm	cyber4/emotional_dialogic_hmm.wav	Hmm
+POSE_FORWARD,cyber4/emotional_08A.wav	frog8
+cyber4/emotional_dialogic_08.wav,IDLESTILL	Why's boy nose?
+POSE_FORWARD,cyber4/emotional_09A.wav,PUZZLED	frog9	cyber4/emotional_dialogic_mayBeRight.wav	You may be right.	cyber4/emotional_dialogic_mmm.wav	Mmm
+POSE_FORWARD,cyber4/emotional_10A.wav	frog10
+cyber4/emotional_dialogic_10.wav,IDLESTILL	Has boy found frog?
+POSE_FORWARD,cyber4/emotional_11A.wav,PERKUP,IDLESTILL	frog11	cyber4/emotional_dialogic_mmm.wav	Mmm	cyber4/emotional_dialogic_mmhm.wav	Mmhm
+POSE_FORWARD,cyber4/emotional_12A.wav	frog12
+cyber4/emotional_dialogic_12.wav,IDLESTILL	Where's deer going?
+POSE_FORWARD,cyber4/emotional_13.wav,SCARED,IDLESTILL	frog13	cyber4/emotional_dialogic_goodThought.wav	Good thought	cyber4/emotional_dialogic_mmm.wav	Mmm
+POSE_FORWARD,cyber4/emotional_14.wav	frog14
+cyber4/emotional_dialogic_14.wav,IDLESTILL	Why'd they fall?
+POSE_FORWARD,cyber4/emotional_15A.wav,LAUGH,IDLESTILL	frog15	cyber4/emotional_dialogic_mmhm.wav	Mmhm	cyber4/emotional_dialogic_hmm.wav	Hmm
+POSE_FORWARD,cyber4/emotional_16.wav	frog16
+cyber4/emotional_dialogic_16.wav,IDLESTILL	What'd they hear?
+POSE_FORWARD,cyber4/emotional_17.wav	frog17	cyber4/emotional_dialogic_hmm.wav	Hmm	cyber4/emotional_dialogic_mmhm.wav	Mmhm
+POSE_FORWARD,cyber4/emotional_18.wav	frog18
+cyber4/emotional_dialogic_18.wav,IDLESTILL	What's over log?
+POSE_FORWARD,cyber4/emotional_19.wav,EXCITED,IDLESTILL	frog19	cyber4/emotional_dialogic_mayBeRight.wav	You may be right.
+POSE_FORWARD,cyber4/emotional_20.wav	frog20
+cyber4/emotional_dialogic_20.wav,IDLESTILL	How's boy feel?
+POSE_FORWARD,cyber4/emotional_21.wav,IDLESTILL	frog21	cyber4/emotional_dialogic_mmm.wav	Mmm	cyber4/emotional_dialogic_mmhm.wav	Mmhm	
+POSE_FORWARD,cyber4/emotional_22.wav	frog22
+cyber4/emotional_dialogic_22.wav,IDLESTILL	What'd you do?	cyber4/emotional_dialogic_goodThought.wav	Good thought	cyber4/emotional_dialogic_mmm.wav	Mmm
+cyber4/emotional_ending_01.wav,EXCITED	Yay
+cyber4/emotional_ending_02.wav,HAPPY_WIGGLE,IDLESTILL	I liked played
+cyber4/emotional_ending_03.wav,LAUGH,IDLESTILL	Maybe play again
+cyber4/emotional_ending_04.wav,YES,IDLESTILL	Bye I liked played	cyber4/emotional_dialogic_mmm.wav	Mmm	cyber4/emotional_dialogic_mmhm.wav	Mmhm
+cyber4/emotional_ending_05.wav,AGREEMENT,IDLESTILL	See you later

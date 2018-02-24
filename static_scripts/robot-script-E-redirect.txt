@@ -1,0 +1,4 @@
+cyber4/emotional_redirect_01.wav	R1: Let's come back
+cyber4/emotional_redirect_02.wav	R2: Hey, next page
+cyber4/emotional_redirect_03.wav	R3: Look
+cyber4/emotional_redirect_04.wav	R4: What'll happen next

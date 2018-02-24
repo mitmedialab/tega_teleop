@@ -1,0 +1,78 @@
+PERKUP,rr1_intro_01.wav,PARTICIPANT_TURN	Hi, Im Tega!
+rr1_intro_02.wav,LAUGH	My favorite color
+rr1_intro_03.wav,PARTICIPANT_TURN	Whats your favorite?
+rr1_intro_05.wav	I like blue	rr1_intro_04.wav,AGREEMENT	Thats pretty!
+rr1_intro_08.wav,SHIMMY,LAUGH,PARTICIPANT_TURN	Do you dance
+rr1_intro_09.wav	Oh cool
+rr1_picture1_02.wav,HAPPY_UP,PARTICIPANT_TURN	Lets look at them	rr1_picture1_03.wav,PARTICIPANT_TURN	Aw, come on
+rr1_picture1_04.wav	Here you can see holidays
+rr1_picture1_05.wav,PARTICIPANT_TURN	Favorite holiday?	mmhm.wav,PARTICIPANT_TURN	Mhmmm	tellMe.wav,POSE1,IDLESTILL,PARTICIPANT_TURN	tell me more?	whatDoYouLike.wav,PARTICIPANT_TURN	What like about it	whatHappened.wav,PARTICIPANT_TURN	And then what happened
+rr1_picture1_06.wav,LAUGH	Last year for Christmas
+rr1_picture1_07.wav,PARTICIPANT_TURN	Favorite toy?	whatDoYouLike.wav,PARTICIPANT_TURN	What like about it	tellMe.wav,PARTICIPANT_TURN	tell me more?	ohCool.wav,LAUGH,PARTICIPANT_TURN	Oh cool!	elephant.wav,PARTICIPANT_TURN	I like elephants!	PUZZLED,guessheardwrong.wav,PARTICIPANT_TURN	Oops I guess I heard	
+rr1_picturegen_01.wav,PARTICIPANT_TURN	Another picture
+rr1_picture2_01.wav	Look at all the kid
+rr1_picture2_02.wav	My favorite part
+rr1_picture2_03.wav,PARTICIPANT_TURN	What's your favorite school?	keepGoing.wav,PARTICIPANT_TURN	Keep going.	whatDoYouLike.wav,PARTICIPANT_TURN	What like about it?	awesome.wav,PERKUP,PARTICIPANT_TURN	Awesome!
+rr1_picture2_04.wav,LAUGH	My favorite summer
+rr1_picture2_05.wav,PARTICIPANT_TURN	What do you like summer?	tellMe.wav,PARTICIPANT_TURN	tell me more	Why.wav,SHIFT_WEIGHT1,PARTICIPANT_TURN	Why?	ohCool.wav,PARTICIPANT_TURN	Oh cool!
+rr1_picturegen_01.wav,PARTICIPANT_TURN	Another picture
+rr1_picture3_01.wav,EXCITED	Ooh, a park!
+rr1_picture3_02.wav,SWAY,LAUGH	My favorite park.
+rr1_picture3_03.wav,PARTICIPANT_TURN	What's your favorite park?	Why.wav,SHIFT_WEIGHT2,PARTICIPANT_TURN	Why?	whatDoYouLike.wav,SHIFT_WEIGHT2,PARTICIPANT_TURN	What do you like about it	thatSoundsLikeSoMuchFun.wav,EXITED,PARTICIPANT_TURN	So much fun
+rr1_picture3_04.wav,LAUGH	I play hide
+rr1_picture3_05.wav,PARTICIPANT_TURN	Tell me friends?	keepGoing.wav,PERKUP,PARTICIPANT_TURN	Keep Going	tellMe.wav,PARTICIPANT_TURN	Can you tell me more?	Wow.wav,PERKUP,PARTICIPANT_TURN	Wow	PUZZLED,didnthear.wav,PARTICIPANT_TURN	I didnt hear that
+rr1_story_03.wav	Yay!
+rr1_picturegen_01.wav,PARTICIPANT_TURN	Another picture
+rr1_picture4_01.wav	Heres a picture of movies
+rr1_picture4_02.wav	My favorite WALL-E
+rr1_picture4_03.wav,PARTICIPANT_TURN	Have you seen movies?	whatHappened.wav,PARTICIPANT_TURN	And then what happened?	tellMe.wav,SHIFT_WEIGHT1,PARTICIPANT_TURN	Can you tell me more?	awesome.wav,PARTICIPANT_TURN	Awesome
+rr1_picture4_04.wav,PROUD	I also like superhero movies!
+rr1_picture4_05.wav,INTERESTED,PARTICIPANT_TURN	What superpower?	tellMe.wav,SHIFT_WEIGHT1,PARTICIPANT_TURN	Can you tell me more?	Why.wav,POSE2,IDLESTILL,PARTICIPANT_TURN	Why?	Wow.wav,PERKUP,PARTICIPANT_TURN	Wow!
+rr1_sticker_01.wav,PARTICIPANT_TURN	Hey, I want that sticker!
+rr1_sticker_02.wav,SAD,PARTICIPANT_TURN	Aww.
+THINKING,POSE_FORWARD,rr1_sticker_03.wav,IDLESTILL,PARTICIPANT_TURN	Can I have your sticker?
+rr1_sticker_04.wav,HAPPY_DANCE,PARTICIPANT_TURN	Wow, thank you!	SAD,SHIFT_WEIGHT2,rr1_sticker_05.wav,PARTICIPANT_TURN	Aww, thats okay
+rr1_story_01.wav,PERKUP,PARTICIPANT_TURN	I want to practice!
+rr1_story_02.wav,PARTICIPANT_TURN	Will you listen?
+rr1_frog_01.wav	frog1	rr1_picture1_03.wav	Aw come on	rr1_story_03.wav,HAPPY_WIGGLE	Yay!
+rr1_frog_02.wav,YES	frog2
+rr1_frog_03.wav,SAD	frog3
+rr1_frog_04.wav	frog4
+rr1_frogdialogic_04.wav,PARTICIPANT_TURN	What does boy feel?	hmm.wav,PARTICIPANT_TURN	Hmm	mmhm.wav,PARTICIPANT_TURN	Mmhm
+rr1_frog_05.wav,THINKING	frog5
+rr1_frog_06.wav	frog6
+rr1_frog_07.wav	frog7
+rr1_frog_08.wav	frog8
+rr1_frog_09.wav,PUZZLED	frog9
+rr1_frog_10.wav	frog10
+rr1_frog_11.wav,PERKUP	frog11
+rr1_frog_12.wav	frog12
+rr1_frogdialogic_12.wav,PARTICIPANT_TURN	Wheres deer going?	goodThought.wav,PARTICIPANT_TURN	Good thought	mmm.wav,PARTICIPANT_TURN	Mmm
+rr1_frog_13.wav,SCARED	frog13
+rr1_frog_14.wav	frog14
+rr1_frog_15.wav,LAUGH	frog15
+rr1_frog_16.wav	frog16
+rr1_frogdialogic_16.wav,PARTICIPANT_TURN	Whatd they hear?	hmm.wav,PARTICIPANT_TURN	Hmm	mmhm.wav,PARTICIPANT_TURN	Mmhm
+rr1_frog_17.wav	frog17
+rr1_frog_18.wav	frog18
+rr1_frog_19.wav,EXCITED	frog19
+rr1_frog_20.wav	frog20
+rr1_frog_21.wav	frog21
+rr1_frog_22.wav	frog22
+rr1_story_03.wav	Yay
+rr1_story_05.wav,PARTICIPANT_TURN	I really like that story.
+rr1_story_06.wav,PARTICIPANT_TURN	Did you like the story?
+rr1_story_07.wav	Aw, thats okay.	rr1_story_03.wav	Yay!
+rr1_story_08.wav,SILENT_SAD	Im worried
+rr1_story_09.wav	I think I forgot
+rr1_story_10.wav,PARTICIPANT_TURN	Do you think you could retell
+EXCITED,rr1_story_11.wav,PARTICIPANT_TURN	Hooray! Im really excited	rr1_story_12.wav,PARTICIPANT_TURN	Please? It would really help
+mmhm.wav,PARTICIPANT_TURN	MmHm	uhuhh.wav,PARTICIPANT_TURN	Uhuhh	keepGoing.wav,PARTICIPANT_TURN	Keep going	whatHappened.wav,PARTICIPANT_TURN	Then what happened?	PUZZLED,didnthear.wav,PARTICIPANT_TURN	I didn't hear that	PUZZLED,sayitagain.wav,PARTICIPANT_TURN	Say that again
+rr1_story_13.wav,PARTICIPANT_TURN	Thanks for telling
+rr1_story_14.wav,PARTICIPANT_TURN	Awesome job
+rr1_story_15.wav,EXCITED	Remembered everything
+rr1_story_16.wav,PARTICIPANT_TURN	Liked telling stories
+rr1_story_17.wav,PARTICIPANT_TURN	Play again soon
+rr1_story_18.wav,HAPPY_WIGGLE,PARTICIPANT_TURN	Ooh, thank you!
+rr1_story_19.wav,PARTICIPANT_TURN	Liked playing!
+rr1_story_20.wav,HAPPY_DANCE	See you later!

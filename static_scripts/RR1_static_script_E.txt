@@ -1,0 +1,6 @@
+rr1_story_03.wav,PARTICIPANT_TURN	Yay
+thatsSoSilly.wav,PARTICIPANT_TURN	That's silly
+hmThatsGoodQuestion.wav,PARTICIPANT_TURN	Hm that's a good question 
+yeahIDontKnow.wav,PARTICIPANT_TURN	Yeah I don't know. 
+uhuhh.wav,PARTICIPANT_TURN	Uhuhh. 
+Why.wav,PARTICIPANT_TURN	Why? 

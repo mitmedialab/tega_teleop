@@ -1,0 +1,45 @@
+PERKUP,cyber4/flat_intro_01.wav	Hi, I'm Tega!
+cyber4/flat_intro_02.wav	My favorite color
+cyber4/flat_intro_03.wav	What's your favorite?
+cyber4/flat_intro_05.wav	I like blue	cyber4/flat_intro_04.wav,FLAT_AGREEMENT	That's pretty!
+cyber4/flat_intro_06.wav,SHIFT_WEIGHT2	What do you like?
+cyber4/flat_intro_08.wav,SHIMMY	Do you dance?	cyber4/flat_intro_07.wav	That sounds fun
+cyber4/flat_intro_10.wav,HAPPY_WIGGLE	Hear story?	cyber4/flat_intro_09.wav	Oh cool
+POSE_FORWARD,cyber4/flat_01.wav	frog1	cyber4/flat_intro_11.wav	Great!	cyber4/flat_intro_12.wav	It'll be fun
+POSE_FORWARD,cyber4/flat_02.wav	frog2
+cyber4/flat_dialogic_02.wav,IDLESTILL	What's frog doing?
+POSE_FORWARD,cyber4/flat_03.wav,SILENT_SAD	frog3	cyber4/flat_dialogic_goodThought.wav	Good thought	cyber4/flat_dialogic_mmm.wav	Mmm
+POSE_FORWARD,cyber4/flat_04.wav	frog4
+cyber4/flat_dialogic_04.wav,IDLESTILL	What does boy feel?
+POSE_FORWARD,cyber4/flat_05.wav	frog5	cyber4/flat_dialogic_hmm.wav	Hmm	cyber4/flat_dialogic_mmhm.wav	Mmhm
+POSE_FORWARD,cyber4/flat_06.wav	frog6
+cyber4/flat_dialogic_06.wav,IDLESTILL	What's boy doing?
+POSE_FORWARD,cyber4/flat_07.wav	frog7	cyber4/flat_dialogic_mmhm.wav	Mmhm	cyber4/flat_dialogic_hmm.wav	Hmm
+POSE_FORWARD,cyber4/flat_08A.wav	frog8
+cyber4/flat_dialogic_08.wav,IDLESTILL	Why's boy nose?
+POSE_FORWARD,cyber4/flat_09A.wav	frog9	cyber4/flat_dialogic_mayBeRight.wav	You may be right.	cyber4/flat_dialogic_mmm.wav	Mmm
+POSE_FORWARD,cyber4/flat_10A.wav	frog10
+cyber4/flat_dialogic_10.wav,IDLESTILL	Has boy found frog?
+POSE_FORWARD,cyber4/flat_11A.wav,PERKUP	frog11	cyber4/flat_dialogic_mmm.wav	Mmm	cyber4/flat_dialogic_mmhm.wav	Mmhm
+POSE_FORWARD,cyber4/flat_12A.wav	frog12
+cyber4/flat_dialogic_12.wav,IDLESTILL	Where's deer going?
+POSE_FORWARD,cyber4/flat_13.wav,SCARED	frog13	cyber4/flat_dialogic_goodThought.wav	Good thought	cyber4/flat_dialogic_mmm.wav	Mmm
+POSE_FORWARD,cyber4/flat_14.wav	frog14
+cyber4/flat_dialogic_14.wav,IDLESTILL	Why'd they fall?
+POSE_FORWARD,cyber4/flat_15A.wav	frog15	cyber4/flat_dialogic_mmhm.wav	Mmhm	cyber4/flat_dialogic_hmm.wav	Hmm
+POSE_FORWARD,cyber4/flat_16.wav	frog16
+cyber4/flat_dialogic_16.wav,IDLESTILL	What'd they hear?
+POSE_FORWARD,cyber4/flat_17.wav	frog17	cyber4/flat_dialogic_hmm.wav	Hmm	cyber4/flat_dialogic_mmhm.wav	Mmhm
+POSE_FORWARD,cyber4/flat_18.wav	frog18
+cyber4/flat_dialogic_18.wav,IDLESTILL	What's over log?
+POSE_FORWARD,cyber4/flat_19.wav,HAPPY_UP	frog19	cyber4/flat_dialogic_mayBeRight.wav	You may be right.
+POSE_FORWARD,cyber4/flat_20.wav	frog20
+cyber4/flat_dialogic_20.wav,IDLESTILL	How's boy feel?
+POSE_FORWARD,cyber4/flat_21.wav	frog21	cyber4/flat_dialogic_mmm.wav	Mmm	cyber4/flat_dialogic_mmhm.wav	Mmhm	
+POSE_FORWARD,cyber4/flat_22.wav	frog22
+cyber4/flat_dialogic_22.wav,IDLESTILL	What'd you do?	cyber4/flat_dialogic_goodThought.wav	Good thought	cyber4/flat_dialogic_mmm.wav	Mmm
+cyber4/flat_ending_01.wav,HAPPY_UP	Yay
+cyber4/flat_ending_02.wav,HAPPY_WIGGLE	I liked played
+cyber4/flat_ending_03.wav	Maybe play again
+cyber4/flat_ending_04.wav,YES	Bye I liked played	cyber4/flat_dialogic_mmm.wav	Mmm	cyber4/flat_dialogic_mmhm.wav	Mmhm
+cyber4/flat_ending_05.wav,FLAT_AGREEMENT	See you later
