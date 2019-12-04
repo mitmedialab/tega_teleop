@@ -53,7 +53,7 @@ class tega_fidget_ui(QtGui.QWidget):
         self.fidget_layout.addWidget(self.label, 0, 0)
 
         self.fidget_set_box = QtGui.QComboBox(self)
-        fidget_set_list = self.fidget_sets.keys()
+        fidget_set_list = list(self.fidget_sets.keys())
         self.fidget_set_box.addItems(fidget_set_list)
         self.fidget_set_box.activated['QString'].connect(self.on_fidget_set_selected)
         self.fidget_layout.addWidget(self.fidget_set_box, 1, 0, 1, 2)

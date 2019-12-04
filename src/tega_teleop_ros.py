@@ -74,7 +74,7 @@ class tega_teleop_ros():
     def send_opal_message(self, command):
         """ Publish opal command message """
         if self.tablet_pub is not None:
-            print 'sending opal command: %s' % command
+            print('sending opal command: %s' % command)
             msg = OpalCommand()
             # add header
             msg.header = Header()
@@ -86,7 +86,7 @@ class tega_teleop_ros():
     def send_motion_message(self, motion):
         """ Publish TegaAction do motion message """
         if self.tega_pub is not None:
-            print 'sending motion message: %s' % motion
+            print('sending motion message: %s' % motion)
             msg = TegaAction()
             # add header
             msg.header = Header()
@@ -98,7 +98,7 @@ class tega_teleop_ros():
     def send_lookat_message(self, lookat):
         """ Publish TegaAction lookat message """
         if self.tega_pub is not None:
-            print 'sending lookat message: %s' % lookat
+            print('sending lookat message: %s' % lookat)
             msg = TegaAction()
             # add header
             msg.header = Header()
@@ -111,7 +111,7 @@ class tega_teleop_ros():
     def send_speech_message(self, speech):
         """ Publish TegaAction playback audio message """
         if self.tega_pub is not None:
-            print '\nsending speech message: %s' % speech
+            print('\nsending speech message: %s' % speech)
             msg = TegaAction()
             # add header
             msg.header = Header()
@@ -123,7 +123,7 @@ class tega_teleop_ros():
     def send_fidget_message(self, fidget):
         """ Publish TegaAction message setting the fidget set in use. """
         if self.tega_pub is not None:
-            print '\nsending fidget message: %s' % fidget
+            print('\nsending fidget message: %s' % fidget)
             msg = TegaAction()
             # add header
             msg.header = Header()
@@ -135,7 +135,7 @@ class tega_teleop_ros():
     def send_volume_message(self, volume):
         """ Publish TegaAction message setting the percent volume to use. """
         if self.tega_pub is not None:
-            print '\nsending volume message: %s' % volume
+            print('\nsending volume message: %s' % volume)
             msg = TegaAction()
             # add header
             msg.header = Header()
@@ -148,7 +148,7 @@ class tega_teleop_ros():
     def send_entrain_audio_message(self, speech, visemes, age, entrain):
         """ Publish EntrainAudio message. """
         if self.entrain_pub is not None:
-            print '\nsending entrain speech message: %s' % speech
+            print('\nsending entrain speech message: %s' % speech)
             msg = EntrainAudio()
             msg.header = Header()
             msg.header.stamp = rospy.Time.now()
@@ -162,7 +162,7 @@ class tega_teleop_ros():
     def send_interaction_state_message(self, is_turn):
         """ Publish InteractionState message. """
         if self.state_pub is not None:
-            print '\nsending interaction state message: %s' % is_turn
+            print('\nsending interaction state message: %s' % is_turn)
             msg = InteractionState()
             msg.header = Header()
             msg.header.stamp = rospy.Time.now()

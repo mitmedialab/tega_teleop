@@ -209,7 +209,7 @@ class tega_speech_ui(QtGui.QWidget):
                     b.deleteLater()
                     b = None
             except AttributeError:
-                print "No script buttons yet... let's set some up."
+                print("No script buttons yet... let's set some up.")
 
             # make new array of buttons for the number of speech options
             # that this new script to load has
@@ -252,7 +252,7 @@ class tega_speech_ui(QtGui.QWidget):
                 b.deleteLater()
                 b = None
         except AttributeError:
-            print "No static script buttons yet... let's set some up."
+            print("No static script buttons yet... let's set some up.")
 
         # make new list of buttons for the static script options
         self.static_buttons = []
@@ -437,7 +437,7 @@ class tega_speech_ui(QtGui.QWidget):
         # since the last time we changed the button colors or sent speech, and
         # use that to determine whether we should suggest playing another
         # redirect or not.
-        print self.flags.child_is_attending
+        print(self.flags.child_is_attending)
         if self.flags.child_is_attending:
             for sb in self.static_buttons:
                 sb.setStyleSheet('QPushButton {color: purple;}')
@@ -469,10 +469,10 @@ class tega_speech_ui(QtGui.QWidget):
             counter += increment
             time.sleep(increment)
 
-        print "Waited {} seconds".format(counter)
+        print("Waited {} seconds".format(counter))
         if counter >= timeout:
-            print "Warning: timed out waiting for robot to start playing " \
-                     "sound! timeout: " + str(timeout) + ". Moving on..."
+            print("Warning: timed out waiting for robot to start playing " \
+                     "sound! timeout: " + str(timeout) + ". Moving on...")
 
     def wait_for_motion(self, timeout=8):
         """ Wait until the robot has started playing an animation before going
@@ -488,8 +488,8 @@ class tega_speech_ui(QtGui.QWidget):
             time.sleep(increment)
 
         if counter >= timeout:
-            print "Warning: timed out waiting for robot to start doing " \
-                     "motion! timeout: " + str(timeout) + ". Moving on..."
+            print("Warning: timed out waiting for robot to start doing " \
+                     "motion! timeout: " + str(timeout) + ". Moving on...")
 
 
     def send_participant_turn(self):
